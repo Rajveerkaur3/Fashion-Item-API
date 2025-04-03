@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import * as fashionItemService from "../services/fashionItemService";
+import * as fashionItemService from "../services/FashionItemService";
 import { FashionItem } from '../models/FashionItemModel';
 import { StatusCodes } from "http-status-codes"; 
 import { successResponse } from "../models/responseModel"; 
