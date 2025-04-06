@@ -4,6 +4,7 @@ import morgan from "morgan";
 // Import fashion item routes
 import fashionItemRoutes from './api/v1/routes/FashionItemRoutes'; 
 import discountRoutes from './api/v1/routes/Discountroutes'; 
+import brandRoutes from './api/v1/routes/BrandRoutes'
 
 // Import Swagger setup
 import setupSwagger from "../config/swagger";
@@ -28,6 +29,7 @@ app.get("/", (req, res) => {
 // Registering routes for resources
 app.use('/api/v1/fashion-items', fashionItemRoutes);
 app.use('/api/v1/discounts', discountRoutes);
+app.use('/api/v1/brands', brandRoutes);
 
 app.get('/api/v1/fashion-items/:id', (req, res) => {
   const { id } = req.params;
