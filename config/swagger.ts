@@ -8,9 +8,10 @@ const swaggerOptions: swaggerJsDoc.Options = {
     info: {
       title: "Fashion Item API Documentation",
       version: "1.0.0",
-      description: "API to manage fashion items and discounts in the store"
+      description: "API to manage fashion items, discounts, and brands in the store"
     },
     paths: {
+      // Existing paths for fashion items and discounts
       "/api/v1/fashion-items": {
         post: {
           summary: "Create a new fashion item",
@@ -70,112 +71,8 @@ const swaggerOptions: swaggerJsDoc.Options = {
           }
         }
       },
-      "/api/v1/fashion-items/{id}": {
-        get: {
-          summary: "Retrieve a fashion item by ID",
-          parameters: [
-            {
-              in: "path",
-              name: "id",
-              required: true,
-              schema: { type: "string" },
-              description: "ID of the fashion item"
-            }
-          ],
-          responses: {
-            "200": {
-              description: "Fashion item found",
-              content: {
-                "application/json": {
-                  schema: {
-                    $ref: "#/components/schemas/FashionItem"
-                  }
-                }
-              }
-            },
-            "404": {
-              description: "Fashion item not found",
-              content: {
-                "application/json": {
-                  schema: {
-                    type: "object",
-                    properties: {
-                      message: {
-                        type: "string",
-                        example: "Fashion item not found"
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
-        put: {
-          summary: "Update a fashion item by ID",
-          parameters: [
-            {
-              in: "path",
-              name: "id",
-              required: true,
-              schema: { type: "string" },
-              description: "ID of the fashion item to update"
-            }
-          ],
-          requestBody: {
-            required: true,
-            content: {
-              "application/json": {
-                schema: {
-                  $ref: "#/components/schemas/FashionItemUpdate"
-                }
-              }
-            }
-          },
-          responses: {
-            "200": {
-              description: "Fashion item updated successfully",
-              content: {
-                "application/json": {
-                  schema: {
-                    $ref: "#/components/schemas/FashionItem"
-                  }
-                }
-              }
-            }
-          }
-        },
-        delete: {
-          summary: "Delete a fashion item by ID",
-          parameters: [
-            {
-              in: "path",
-              name: "id",
-              required: true,
-              schema: { type: "string" },
-              description: "ID of the fashion item to delete"
-            }
-          ],
-          responses: {
-            "200": {
-              description: "Fashion item deleted successfully",
-              content: {
-                "application/json": {
-                  schema: {
-                    type: "object",
-                    properties: {
-                      message: {
-                        type: "string",
-                        example: "Fashion item deleted successfully."
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
+      
+      // Existing paths for discounts
       "/api/v1/discounts": {
         post: {
           summary: "Create a new discount",
@@ -233,31 +130,88 @@ const swaggerOptions: swaggerJsDoc.Options = {
           }
         }
       },
-      "/api/v1/discounts/{id}": {
+      "/api/v1/brands": {
+        post: {
+          summary: "Create a new brand",
+          requestBody: {
+            required: true,
+            content: {
+              "application/json": {
+                schema: {
+                  type: "object",
+                  required: ["name", "country", "establishedYear", "description"],
+                  properties: {
+                    name: { type: "string", example: "Zara" },
+                    country: { type: "string", example: "Spain" },
+                    establishedYear: { type: "string", example: "1975" },
+                    description: { type: "string", example: "A global fashion retailer" }
+                  }
+                }
+              }
+            }
+          },
+          responses: {
+            "201": {
+              description: "Brand created successfully",
+              content: {
+                "application/json": {
+                  schema: {
+                    $ref: "#/components/schemas/Brand"
+                  }
+                }
+              }
+            }
+          }
+        },
         get: {
-          summary: "Retrieve a discount by ID",
+          summary: "Retrieve all brands",
+          responses: {
+            "200": {
+              description: "A list of brands",
+              content: {
+                "application/json": {
+                  schema: {
+                    type: "object",
+                    properties: {
+                      brands: {
+                        type: "array",
+                        items: {
+                          $ref: "#/components/schemas/Brand"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/api/v1/brands/{id}": {
+        get: {
+          summary: "Retrieve a brand by ID",
           parameters: [
             {
               in: "path",
               name: "id",
               required: true,
               schema: { type: "string" },
-              description: "ID of the discount"
+              description: "ID of the brand"
             }
           ],
           responses: {
             "200": {
-              description: "Discount found",
+              description: "Brand found",
               content: {
                 "application/json": {
                   schema: {
-                    $ref: "#/components/schemas/Discount"
+                    $ref: "#/components/schemas/Brand"
                   }
                 }
               }
             },
             "404": {
-              description: "Discount not found",
+              description: "Brand not found",
               content: {
                 "application/json": {
                   schema: {
@@ -265,7 +219,7 @@ const swaggerOptions: swaggerJsDoc.Options = {
                     properties: {
                       message: {
                         type: "string",
-                        example: "Discount not found"
+                        example: "Brand not found"
                       }
                     }
                   }
@@ -275,14 +229,14 @@ const swaggerOptions: swaggerJsDoc.Options = {
           }
         },
         put: {
-          summary: "Update a discount by ID",
+          summary: "Update a brand by ID",
           parameters: [
             {
               in: "path",
               name: "id",
               required: true,
               schema: { type: "string" },
-              description: "ID of the discount to update"
+              description: "ID of the brand to update"
             }
           ],
           requestBody: {
@@ -290,18 +244,18 @@ const swaggerOptions: swaggerJsDoc.Options = {
             content: {
               "application/json": {
                 schema: {
-                  $ref: "#/components/schemas/Discount"
+                  $ref: "#/components/schemas/Brand"
                 }
               }
             }
           },
           responses: {
             "200": {
-              description: "Discount updated successfully",
+              description: "Brand updated successfully",
               content: {
                 "application/json": {
                   schema: {
-                    $ref: "#/components/schemas/Discount"
+                    $ref: "#/components/schemas/Brand"
                   }
                 }
               }
@@ -309,19 +263,19 @@ const swaggerOptions: swaggerJsDoc.Options = {
           }
         },
         delete: {
-          summary: "Delete a discount by ID",
+          summary: "Delete a brand by ID",
           parameters: [
             {
               in: "path",
               name: "id",
               required: true,
               schema: { type: "string" },
-              description: "ID of the discount to delete"
+              description: "ID of the brand to delete"
             }
           ],
           responses: {
             "200": {
-              description: "Discount deleted successfully",
+              description: "Brand deleted successfully",
               content: {
                 "application/json": {
                   schema: {
@@ -329,7 +283,7 @@ const swaggerOptions: swaggerJsDoc.Options = {
                     properties: {
                       message: {
                         type: "string",
-                        example: "Discount deleted successfully."
+                        example: "Brand deleted successfully."
                       }
                     }
                   }
@@ -342,22 +296,11 @@ const swaggerOptions: swaggerJsDoc.Options = {
     },
     components: {
       schemas: {
+        // Existing schemas for FashionItem and Discount
         FashionItem: {
           type: "object",
           properties: {
             id: { type: "string", example: "1" },
-            item_name: { type: "string", example: "Floral Dress" },
-            brand: { type: "string", example: "Zara" },
-            category: { type: "string", example: "Dress" },
-            size: { type: "string", example: "M" },
-            price: { type: "string", example: "49.99" },
-            color: { type: "string", example: "Pink" }
-          },
-          required: ["item_name", "brand", "category", "size", "price", "color"]
-        },
-        FashionItemUpdate: {
-          type: "object",
-          properties: {
             item_name: { type: "string", example: "Floral Dress" },
             brand: { type: "string", example: "Zara" },
             category: { type: "string", example: "Dress" },
@@ -377,6 +320,18 @@ const swaggerOptions: swaggerJsDoc.Options = {
             endDate: { type: "string", example: "2025-12-31" }
           },
           required: ["percentage", "description", "startDate", "endDate"]
+        },
+        // New schema for Brand
+        Brand: {
+          type: "object",
+          properties: {
+            id: { type: "string", example: "1" },
+            name: { type: "string", example: "Zara" },
+            country: { type: "string", example: "Spain" },
+            establishedYear: { type: "string", example: "1975" },
+            description: { type: "string", example: "A global fashion retailer" }
+          },
+          required: ["name", "country", "establishedYear", "description"]
         }
       }
     }
