@@ -1,7 +1,7 @@
 import Joi, { ObjectSchema } from "joi";
 
 export const fashionItemSchema: ObjectSchema = Joi.object({
-  name: Joi.string().min(3).max(100).required().messages({
+  item_name: Joi.string().min(3).max(100).required().messages({
     "any.required": "Fashion item name is required",
     "string.empty": "Fashion item name cannot be empty",
     "string.min": "Fashion item name must be at least 3 characters long",
@@ -53,3 +53,26 @@ export const fashionItemSchema: ObjectSchema = Joi.object({
   createdAt: Joi.date().default(() => new Date()),
   updatedAt: Joi.date().default(() => new Date()),
 });
+
+
+export const updateFashionItemSchema: ObjectSchema = Joi.object({
+  item_name: Joi.string().min(3).max(100).optional(),
+
+  category: Joi.string().min(3).max(100).optional(),
+
+  price: Joi.number().positive().optional(),
+
+  description: Joi.string().min(10).max(500).optional(),
+
+  brand: Joi.string().min(3).max(100).optional(),
+
+  size: Joi.string().valid("S", "M", "L", "XL", "XXL").optional(),
+
+  color: Joi.string().min(3).max(50).optional(),
+
+  stockQuantity: Joi.number().integer().min(0).optional(),
+
+  updatedAt: Joi.date().default(() => new Date()),
+
+}).unknown(true); 
+
