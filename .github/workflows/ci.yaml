@@ -1,12 +1,33 @@
+name: Node.js CI
+
+# specify which GitHub Actions trigger the workflow
+on:
+  # Trigger on pushes to the main branch
+  push:
+    branches: [main]
+  # Trigger on opening of a pull request to the main branch
+  pull_request:
+    branches: [main]
+  # Allow manual trigger
+  workflow_dispatch: 
+
 jobs:
+  # Define build job running on the latest Ubuntu version
   build:
     runs-on: ubuntu-latest
 
     steps:
+      # Check out repository
       - uses: actions/checkout@v2
+
+      # Set up Node.js environment
       - name: Use Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: "16"  # Use a newer version of Node.js
+          node-version: "16"  # You can update this to the version you need
+
+      # Install project dependencies
       - run: npm install
+
+      # Run npm test script
       - run: npm test
