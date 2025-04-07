@@ -1,3 +1,14 @@
+jest.mock('../config/firebaseConfig', () => ({
+    db: {
+      collection: jest.fn().mockReturnThis(),
+      doc: jest.fn().mockReturnThis(),
+      get: jest.fn(),
+      add: jest.fn(),
+      update: jest.fn(),
+      delete: jest.fn(),
+      where: jest.fn(),
+    }
+  }));
 import { getAllDiscounts, createDiscount, getDiscountById, updateDiscount, deleteDiscount } from "../src/api/v1/services/DiscountService";
 import { Discount } from '../src/api/v1/models/DiscountModel';
 import { db } from "../config/firebaseConfig";
