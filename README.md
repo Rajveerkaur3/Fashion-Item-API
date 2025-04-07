@@ -56,7 +56,7 @@ npm start
 4. Access the API Documentation:
 The API documentation is available through Swagger at:
 
-http://localhost:3000/docs
+http://localhost:3000/api-docs/#/
 
 
 5. Testing:
