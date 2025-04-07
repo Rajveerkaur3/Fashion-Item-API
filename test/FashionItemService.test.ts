@@ -1,3 +1,14 @@
+jest.mock('../config/firebaseConfig', () => ({
+    db: {
+      collection: jest.fn().mockReturnThis(),
+      doc: jest.fn().mockReturnThis(),
+      get: jest.fn(),
+      add: jest.fn(),
+      update: jest.fn(),
+      delete: jest.fn(),
+      where: jest.fn(),
+    }
+  }));
 import { getAllFashionItems, createFashionItem, getFashionItemById, updateFashionItem, deleteFashionItem } from "../src/api/v1/services/FashionItemService";
 import { FashionItem } from '../src/api/v1/models/FashionItemModel';
 import { db } from "../config/firebaseConfig";
