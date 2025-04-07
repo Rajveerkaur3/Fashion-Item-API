@@ -1,6 +1,6 @@
 name: Node.js CI
 
-# specify which GitHub Actions trigger the workflow
+# Specify which GitHub Actions trigger the workflow
 on:
   # Trigger on pushes to the main branch
   push:
@@ -9,7 +9,7 @@ on:
   pull_request:
     branches: [main]
   # Allow manual trigger
-  workflow_dispatch: 
+  workflow_dispatch:
 
 jobs:
   # Define build job running on the latest Ubuntu version
@@ -28,6 +28,10 @@ jobs:
 
       # Install project dependencies
       - run: npm install
+
+      # Create Firebase credentials file from the GitHub secret
+      - name: Create Firebase credentials file
+        run: echo "${{ secrets.FIREBASE_SERVICE_ACCOUNT }}" > firebase-service-account.json
 
       # Run npm test script
       - run: npm test
