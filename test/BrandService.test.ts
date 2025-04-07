@@ -1,3 +1,14 @@
+jest.mock('../config/firebaseConfig', () => ({
+    db: {
+      collection: jest.fn().mockReturnThis(),
+      doc: jest.fn().mockReturnThis(),
+      get: jest.fn(),
+      add: jest.fn(),
+      update: jest.fn(),
+      delete: jest.fn(),
+      where: jest.fn(),
+    }
+  }));
 import {
     getAllBrands,
     createBrand,
