@@ -1,9 +1,11 @@
 import { initializeApp, cert, ServiceAccount } from "firebase-admin/app";
 import { getFirestore, Firestore } from "firebase-admin/firestore";
-import serviceAccount from "../project---fashion-item-api-firebase-adminsdk-fbsvc-40dcb29851.json";
+
+// Load service account from environment variable
+const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT || "{}");
 
 initializeApp({
-	credential: cert(serviceAccount as ServiceAccount),
+  credential: cert(serviceAccount as ServiceAccount),
 });
 
 const db: Firestore = getFirestore();
