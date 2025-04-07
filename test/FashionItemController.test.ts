@@ -1,3 +1,14 @@
+jest.mock('../config/firebaseConfig', () => ({
+    db: {
+      collection: jest.fn().mockReturnThis(),
+      doc: jest.fn().mockReturnThis(),
+      get: jest.fn(),
+      add: jest.fn(),
+      update: jest.fn(),
+      delete: jest.fn(),
+      where: jest.fn(),
+    }
+  }));
 import request from 'supertest';
 import  app  from '../src/app'; // assuming your app is initialized here
 import * as fashionItemService from '../src/api/v1/services/FashionItemService';
