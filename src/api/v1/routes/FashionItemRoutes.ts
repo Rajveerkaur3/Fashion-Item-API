@@ -2,14 +2,15 @@ import express from 'express';
 import { validateRequest } from "../middleware/ValidateFashionItem";
 import { fashionItemSchema } from "../validations/FashionItemValidation";
 import * as fashionItemController from '../controllers/FashionItemController';
+import { updateFashionItemSchema } from "../validations/FashionItemValidation";
 
 const router = express.Router();
 
 /**
  * @openapi
- * /fashion-items:
+ * /api/v1/fashion-items:
  *   post:
- *     summary: Add a new fashion item
+ *     summary: Create a new fashion item
  *     operationId: createFashionItem
  *     tags:
  *       - Fashion Items
@@ -54,9 +55,11 @@ const router = express.Router();
  *               $ref: '#/components/schemas/FashionItem'
  */
 
+
+
 /**
  * @openapi
- * /fashion-items:
+ * /api/v1/fashion-items:
  *   get:
  *     summary: Retrieve all fashion items
  *     operationId: getAllFashionItems
@@ -75,7 +78,7 @@ const router = express.Router();
 
 /**
  * @openapi
- * /fashion-items/{id}:
+ * /api/v1/fashion-items/{id}:
  *   get:
  *     summary: Get a fashion item by ID
  *     operationId: getFashionItemById
@@ -99,7 +102,7 @@ const router = express.Router();
 
 /**
  * @openapi
- * /fashion-items/{id}:
+ * /api/v1/fashion-items/{id}:
  *   put:
  *     summary: Update a fashion item
  *     operationId: updateFashionItem
@@ -148,7 +151,7 @@ const router = express.Router();
 
 /**
  * @openapi
- * /fashion-items/{id}:
+ * /api/v1/fashion-items/{id}:
  *   delete:
  *     summary: Delete a fashion item by ID
  *     operationId: deleteFashionItem
@@ -178,7 +181,7 @@ const router = express.Router();
 router.post('/', validateRequest(fashionItemSchema), fashionItemController.createFashionItem);
 router.get('/', fashionItemController.getAllFashionItems);
 router.get('/:id', fashionItemController.getFashionItemById);
-router.put('/:id', validateRequest(fashionItemSchema), fashionItemController.updateFashionItem);
+router.put('/:id', validateRequest(updateFashionItemSchema), fashionItemController.updateFashionItem);
 router.delete('/:id', fashionItemController.deleteFashionItem);
 
 export default router;
