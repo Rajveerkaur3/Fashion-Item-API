@@ -41,7 +41,7 @@ A code editor (e.g., Visual Studio Code)
 
 
 1. Clone the repository:
-git clone https://github.com/your-username/fashion-item-api.git
+git clone https://github.com/Rajveerkaur3/Fashion-Item-API.git
 
 cd fashion-item-api
 
