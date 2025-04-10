@@ -1,105 +1,103 @@
-import { Request, Response } from 'express';
-
-// Sample in-memory store for discounts
-let discounts = [
-  {
-    id: '1',
-    percentage: '20%',
-    description: 'Winter Sale',
-    startDate: '2025-12-01',
-    endDate: '2025-12-31',
-    createdAt: new Date(),
-    updatedAt: new Date(),
-  },
-  {
-    id: '2',
-    percentage: '15%',
-    description: 'Summer Sale',
-    startDate: '2025-06-01',
-    endDate: '2025-06-30',
-    createdAt: new Date(),
-    updatedAt: new Date(),
-  },
-];
-
-// Create a new discount
-export const createDiscount = (req: Request, res: Response) => {
-  const { percentage, description, startDate, endDate } = req.body;
-
-  const newDiscount = {
-    id: (discounts.length + 1).toString(),
-    percentage,
-    description,
-    startDate,
-    endDate,
-    createdAt: new Date(),
-    updatedAt: new Date(),
-  };
-
-  discounts.push(newDiscount);
-  res.status(201).json({
-    message: 'Discount created successfully',
-    discount: newDiscount,
-  });
-};
+import { Request, Response, NextFunction } from 'express';
+import { StatusCodes } from 'http-status-codes';
+import * as discountService from '../services/DiscountService';
+import { successResponse } from '../models/responseModel';
 
 // Get all discounts
-export const getAllDiscounts = (req: Request, res: Response) => {
-  res.status(200).json(discounts);
+export const getAllDiscounts = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+): Promise<void> => {
+    try {
+        const discounts = await discountService.getAllDiscounts();
+        res.status(StatusCodes.OK).json(successResponse(discounts, "Discounts retrieved successfully"));
+    } catch (error) {
+        next(error);
+    }
+};
+
+// Create a new discount
+export const createDiscount = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+): Promise<void> => {
+    try {
+        const { percentage, description, startDate, endDate } = req.body;
+        if (!percentage || !description || !startDate || !endDate) {
+            res.status(StatusCodes.BAD_REQUEST).json({ 
+                message: "All fields (percentage, description, startDate, endDate) are required" 
+            });
+            return;
+        }
+
+        const newDiscount = await discountService.createDiscount(req.body);
+        res.status(StatusCodes.CREATED).json(successResponse(newDiscount, "Discount created successfully"));
+    } catch (error) {
+        next(error);
+    }
 };
 
 // Get a discount by ID
-export const getDiscountById = (req: Request, res: Response) => {
-  const discountId = req.params.id;
-  const discount = discounts.find((d) => d.id === discountId);
-
-  if (!discount) {
-    res.status(404).json({ message: `Discount with ID ${discountId} not found.` });
-    return;
-  }
-
-  res.status(200).json(discount);
+export const getDiscountById = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+): Promise<void> => {
+    try {
+        const discount = await discountService.getDiscountById(req.params.id);
+        if (!discount) {
+            res.status(StatusCodes.NOT_FOUND).json({ message: "Discount not found" });
+            return;
+        }
+        res.status(StatusCodes.OK).json(successResponse(discount, "Discount retrieved successfully"));
+    } catch (error) {
+        next(error);
+    }
 };
 
 // Update a discount
-export const updateDiscount = (req: Request, res: Response) => {
-  const { id } = req.params;
-  const { percentage, description, startDate, endDate } = req.body;
-  const discountIndex = discounts.findIndex((d) => d.id === id);
+export const updateDiscount = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+): Promise<void> => {
+    try {
+        const { percentage, description, startDate, endDate } = req.body;
+        if (!percentage || !description || !startDate || !endDate) {
+            res.status(StatusCodes.BAD_REQUEST).json({ 
+                message: "All fields (percentage, description, startDate, endDate) are required" 
+            });
+            return;
+        }
 
-  if (discountIndex === -1) {
-    res.status(404).json({ message: `Discount with ID ${id} not found.` });
-    return;
-  }
+        const updatedDiscount = await discountService.updateDiscount(req.params.id, req.body);
+        if (!updatedDiscount) {
+            res.status(StatusCodes.NOT_FOUND).json({ message: "Discount not found" });
+            return;
+        }
 
-  const updatedDiscount = {
-    ...discounts[discountIndex],
-    percentage,
-    description,
-    startDate,
-    endDate,
-    updatedAt: new Date(),
-  };
-
-  discounts[discountIndex] = updatedDiscount;
-  res.status(200).json({
-    message: 'Discount updated successfully',
-    discount: updatedDiscount,
-  });
+        res.status(StatusCodes.OK).json(successResponse(updatedDiscount, "Discount updated successfully"));
+    } catch (error) {
+        next(error);
+    }
 };
 
 // Delete a discount
-export const deleteDiscount = (req: Request, res: Response) => {
-  const { id } = req.params;
-  const discountIndex = discounts.findIndex((d) => d.id === id);
-
-  if (discountIndex === -1) {
-    res.status(404).json({ message: `Discount with ID ${id} not found.` });
-    return;
-  }
-
-  discounts.splice(discountIndex, 1);
-  res.status(200).json({
-    message: `Discount with ID ${id} deleted successfully.`,
-  });
+export const deleteDiscount = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+): Promise<void> => {
+    try {
+        const success = await discountService.deleteDiscount(req.params.id);
+        if (!success) {
+            res.status(StatusCodes.NOT_FOUND).json({ message: "Discount not found" });
+            return;
+        }
+        res.status(StatusCodes.OK).json(successResponse(null, "Discount deleted successfully"));
+    } catch (error) {
+        next(error);
+    }
 };
