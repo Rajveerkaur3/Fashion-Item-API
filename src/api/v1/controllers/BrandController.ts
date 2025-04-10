@@ -1,105 +1,95 @@
-import { Request, Response } from 'express';
-
-// Sample in-memory store for brands
-let brands = [
-  {
-    id: '1',
-    name: 'Nike',
-    country: 'USA',
-    establishedYear: '1964',
-    description: 'Global sportswear and accessories brand',
-    createdAt: new Date(),
-    updatedAt: new Date(),
-  },
-  {
-    id: '2',
-    name: 'Adidas',
-    country: 'Germany',
-    establishedYear: '1949',
-    description: 'Internationally recognized sports brand',
-    createdAt: new Date(),
-    updatedAt: new Date(),
-  },
-];
-
-// Create a new brand
-export const createBrand = (req: Request, res: Response) => {
-  const { name, country, establishedYear, description } = req.body;
-
-  const newBrand = {
-    id: (brands.length + 1).toString(),
-    name,
-    country,
-    establishedYear,
-    description,
-    createdAt: new Date(),
-    updatedAt: new Date(),
-  };
-
-  brands.push(newBrand);
-  res.status(201).json({
-    message: 'Brand created successfully',
-    brand: newBrand,
-  });
-};
+import { Request, Response, NextFunction } from 'express';
+import * as brandService from '../services/BrandService';
+import { StatusCodes } from 'http-status-codes';
+import { successResponse } from '../models/responseModel';
 
 // Get all brands
-export const getAllBrands = (req: Request, res: Response) => {
-  res.status(200).json(brands);
+export const getAllBrands = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+): Promise<void> => {
+    try {
+        const brands = await brandService.getAllBrands();
+        res.status(StatusCodes.OK).json(successResponse(brands, "Brands retrieved successfully"));
+    } catch (error) {
+        next(error);
+    }
 };
 
-// Get a brand by ID
-export const getBrandById = (req: Request, res: Response) => {
-  const brandId = req.params.id;
-  const brand = brands.find((b) => b.id === brandId);
-
-  if (!brand) {
-    res.status(404).json({ message: `Brand with ID ${brandId} not found.` });
-    return;
-  }
-
-  res.status(200).json(brand);
+// Create new brand
+export const createBrand = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+): Promise<void> => {
+    try {
+        const newBrand = await brandService.createBrand(req.body);
+        res.status(StatusCodes.CREATED).json(successResponse(newBrand, "Brand created successfully"));
+    } catch (error) {
+        next(error);
+    }
 };
 
-// Update a brand
-export const updateBrand = (req: Request, res: Response) => {
-  const { id } = req.params;
-  const { name, country, establishedYear, description } = req.body;
-  const brandIndex = brands.findIndex((b) => b.id === id);
-
-  if (brandIndex === -1) {
-    res.status(404).json({ message: `Brand with ID ${id} not found.` });
-    return;
-  }
-
-  const updatedBrand = {
-    ...brands[brandIndex],
-    name,
-    country,
-    establishedYear,
-    description,
-    updatedAt: new Date(),
-  };
-
-  brands[brandIndex] = updatedBrand;
-  res.status(200).json({
-    message: 'Brand updated successfully',
-    brand: updatedBrand,
-  });
+// Get brand by ID
+export const getBrandById = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+): Promise<void> => {
+    try {
+        const brand = await brandService.getBrandById(req.params.id);
+        if (!brand) {
+            res.status(StatusCodes.NOT_FOUND).json({ message: "Brand not found" });
+            return;
+        }
+        res.status(StatusCodes.OK).json(successResponse(brand, "Brand retrieved"));
+    } catch (error) {
+        next(error);
+    }
 };
 
-// Delete a brand
-export const deleteBrand = (req: Request, res: Response) => {
-  const { id } = req.params;
-  const brandIndex = brands.findIndex((b) => b.id === id);
+// Update brand
+export const updateBrand = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+): Promise<void> => {
+    try {
+        const { name, country, establishedYear, description } = req.body;
+        if (!name || !country || !establishedYear || !description) {
+            res.status(StatusCodes.BAD_REQUEST).json({ 
+                message: "All fields (name, country, establishedYear, description) are required" 
+            });
+            return;
+        }
 
-  if (brandIndex === -1) {
-    res.status(404).json({ message: `Brand with ID ${id} not found.` });
-    return;
-  }
+        const updatedBrand = await brandService.updateBrand(req.params.id, req.body);
+        if (!updatedBrand) {
+            res.status(StatusCodes.NOT_FOUND).json({ message: "Brand not found" });
+            return;
+        }
 
-  brands.splice(brandIndex, 1);
-  res.status(200).json({
-    message: `Brand with ID ${id} deleted successfully.`,
-  });
+        res.status(StatusCodes.OK).json(successResponse(updatedBrand, "Brand updated"));
+    } catch (error) {
+        next(error);
+    }
+};
+
+// Delete brand
+export const deleteBrand = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+): Promise<void> => {
+    try {
+        const success = await brandService.deleteBrand(req.params.id);
+        if (!success) {
+            res.status(StatusCodes.NOT_FOUND).json({ message: "Brand not found" });
+            return;
+        }
+        res.status(StatusCodes.OK).json(successResponse(null, "Brand deleted successfully"));
+    } catch (error) {
+        next(error);
+    }
 };
