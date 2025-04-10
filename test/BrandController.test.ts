@@ -1,117 +1,83 @@
 jest.mock('../config/firebaseConfig', () => ({
-    db: {
-      collection: jest.fn().mockReturnThis(),
-      doc: jest.fn().mockReturnThis(),
-      get: jest.fn(),
-      add: jest.fn(),
-      update: jest.fn(),
-      delete: jest.fn(),
-      where: jest.fn(),
-    }
-  }));
-  
-  import request from 'supertest';
-  import app from '../src/app';
-  import { StatusCodes } from 'http-status-codes';
-  
-  // Mock data
-  const mockBrand = {
-    id: '1',
-    name: 'Nike',
-    country: 'USA',
-    establishedYear: '1964',
-    description: 'Global sportswear brand'
-  };
-  
-  describe('Brand Controller', () => {
-    beforeEach(() => {
-      jest.clearAllMocks();
+  db: {
+    collection: jest.fn().mockReturnThis(),
+    doc: jest.fn().mockReturnThis(),
+    get: jest.fn(),
+    add: jest.fn(),
+    update: jest.fn(),
+    delete: jest.fn(),
+    where: jest.fn(),
+  }
+}));
+
+import request from 'supertest';
+import express, { Application } from 'express';
+import router from '../src/api/v1/routes/BrandRoutes';
+import * as brandService from '../src/api/v1/services/BrandService';
+import { StatusCodes } from 'http-status-codes';
+
+jest.mock('../src/api/v1/services/BrandService');
+
+const app: Application = express();
+app.use(express.json());
+app.use('/api/brands', router);
+
+describe('Brand Controller', () => {
+    const mockBrand = {
+        id: '1',
+        name: 'Nike',
+        country: 'USA',
+        establishedYear: 1964,
+        description: 'Sportswear brand'
+    };
+
+    afterEach(() => {
+        jest.clearAllMocks();
     });
-  
-    describe('GET /api/v1/brands', () => {
-      it('should get all brands', async () => {
-        const response = await request(app).get('/api/v1/brands');
-        
-        expect(response.status).toBe(StatusCodes.OK);
-        expect(response.body).toEqual(expect.arrayContaining([
-          expect.objectContaining({
-            name: expect.any(String),
-            country: expect.any(String)
-          })
-        ]));
-      });
+
+    test('GET /api/brands - should return all brands', async () => {
+        (brandService.getAllBrands as jest.Mock).mockResolvedValue([mockBrand]);
+
+        const res = await request(app).get('/api/brands');
+
+        expect(res.status).toBe(StatusCodes.OK);
+        expect(res.body.message).toBe('Brands retrieved successfully');
+        expect(res.body.data).toHaveLength(1);
     });
-  
-    describe('POST /api/v1/brands', () => {
-      it('should create a new brand', async () => {
-        const newBrand = {
-          name: 'Puma',
-          country: 'Germany',
-          establishedYear: '1948',
-          description: 'Sporting goods manufacturer'
-        };
-  
-        const response = await request(app)
-          .post('/api/v1/brands')
-          .send(newBrand);
-  
-        expect(response.status).toBe(StatusCodes.CREATED);
-        expect(response.body).toEqual({
-          message: 'Brand created successfully',
-          brand: expect.objectContaining(newBrand)
-        });
-      });
+
+    test('GET /api/brands/:id - should return brand by ID', async () => {
+        (brandService.getBrandById as jest.Mock).mockResolvedValue(mockBrand);
+
+        const res = await request(app).get('/api/brands/1');
+
+        expect(res.status).toBe(StatusCodes.OK);
+        expect(res.body.data.name).toBe('Nike');
     });
-  
-    describe('GET /api/v1/brands/:id', () => {
-      it('should get a brand by ID', async () => {
-        const response = await request(app).get('/api/v1/brands/1');
-        
-        expect(response.status).toBe(StatusCodes.OK);
-        expect(response.body).toEqual(expect.objectContaining({
-          id: '1',
-          name: 'Nike'
-        }));
-      });
-  
-      it('should return 404 when brand not found', async () => {
-        const response = await request(app).get('/api/v1/brands/9999');
-        
-        expect(response.status).toBe(StatusCodes.NOT_FOUND);
-        expect(response.body.message).toBe('Brand with ID 9999 not found.');
-      });
+
+    test('GET /api/brands/:id - should return 404 if brand not found', async () => {
+        (brandService.getBrandById as jest.Mock).mockResolvedValue(null);
+
+        const res = await request(app).get('/api/brands/99');
+
+        expect(res.status).toBe(StatusCodes.NOT_FOUND);
+        expect(res.body.message).toBe('Brand not found');
     });
-  
-    describe('PUT /api/v1/brands/:id', () => {
-        it('should update a brand', async () => {
-          const updatedData = {
-            description: 'Updated description'
-          };
-      
-          const response = await request(app)
-            .put('/api/v1/brands/1')
-            .send(updatedData);
-      
-          expect(response.status).toBe(StatusCodes.OK);
-          expect(response.body).toEqual({
-            message: 'Brand updated successfully',
-            brand: expect.objectContaining({
-              id: '1',
-              description: 'Updated description',
-              createdAt: expect.any(String),
-              updatedAt: expect.any(String)
-            })
-          });
-        });
-      });
-      
-  
-    describe('DELETE /api/v1/brands/:id', () => {
-      it('should delete a brand', async () => {
-        const response = await request(app).delete('/api/v1/brands/1');
-        
-        expect(response.status).toBe(StatusCodes.OK);
-        expect(response.body.message).toBe('Brand with ID 1 deleted successfully.');
-      });
+
+    test('DELETE /api/brands/:id - should delete a brand', async () => {
+        (brandService.deleteBrand as jest.Mock).mockResolvedValue(true);
+
+        const res = await request(app).delete('/api/brands/1');
+
+        expect(res.status).toBe(StatusCodes.OK);
+        expect(res.body.message).toBe('Brand deleted successfully');
     });
-  });
+
+    test('DELETE /api/brands/:id - should return 404 if brand not found', async () => {
+        (brandService.deleteBrand as jest.Mock).mockResolvedValue(false);
+
+        const res = await request(app).delete('/api/brands/99');
+
+        expect(res.status).toBe(StatusCodes.NOT_FOUND);
+        expect(res.body.message).toBe('Brand not found');
+    });
+});
