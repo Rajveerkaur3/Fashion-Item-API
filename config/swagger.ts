@@ -71,7 +71,7 @@ const swaggerOptions: swaggerJsDoc.Options = {
           }
         }
       },
-      
+
       // Existing paths for discounts
       "/api/v1/discounts": {
         post: {
@@ -332,6 +332,19 @@ const swaggerOptions: swaggerJsDoc.Options = {
             description: { type: "string", example: "A global fashion retailer" }
           },
           required: ["name", "country", "establishedYear", "description"]
+        },
+        // New schema for UserReview
+        UserReview: {
+          type: "object",
+          properties: {
+            id: { type: "string", example: "1" },
+            user_id: { type: "string", example: "123" },
+            fashion_item_id: { type: "string", example: "1" },
+            rating: { type: "integer", example: 5 },
+            review_text: { type: "string", example: "Great quality and comfortable!" },
+            createdAt: { type: "string", example: "2025-04-10T12:34:56Z" }
+          },
+          required: ["user_id", "fashion_item_id", "rating", "review_text"]
         }
       }
     }
