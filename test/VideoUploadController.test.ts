@@ -1,3 +1,16 @@
+jest.mock('../config/firebaseConfig', () => ({
+    db: {
+      collection: jest.fn().mockReturnThis(),
+      doc: jest.fn().mockReturnThis(),
+      get: jest.fn(),
+      add: jest.fn(),
+      update: jest.fn(),
+      delete: jest.fn(),
+      where: jest.fn(),
+    }
+  }));
+  
+
 import request from 'supertest';
 import express, { Application } from 'express';
 import router from '../src/api/v1/routes/VideoUploadRoutes';
