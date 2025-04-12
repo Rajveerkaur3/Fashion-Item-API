@@ -1,11 +1,16 @@
 import express from "express";
 import morgan from "morgan";
+import multer from 'multer';
+import path from "path";
+const upload = multer({ dest: 'uploads/' });
 
 // Import fashion item routes
 import fashionItemRoutes from './api/v1/routes/FashionItemRoutes'; 
 import discountRoutes from './api/v1/routes/Discountroutes'; 
 import brandRoutes from './api/v1/routes/BrandRoutes';
 import userReviewRoutes from './api/v1/routes/UserReviewRoutes';
+import videoUploadRoutes from './api/v1/routes/VideoUploadRoutes';
+
 
 // Import Swagger setup
 import setupSwagger from "../config/swagger";
@@ -18,6 +23,8 @@ app.use(morgan("combined"));
 
 // Middleware to parse incoming JSON requests
 app.use(express.json());
+app.use(express.urlencoded({ extended: true })); // For form data
+app.use("/uploads", express.static(path.join(__dirname, "../uploads")));
 
 // Setup Swagger for API documentation
 setupSwagger(app);
@@ -31,7 +38,10 @@ app.get("/", (req, res) => {
 app.use('/api/v1/fashion-items', fashionItemRoutes);
 app.use('/api/v1/discounts', discountRoutes);
 app.use('/api/v1/brands', brandRoutes);
-app.use('/api/v1/reviews', userReviewRoutes)
+app.use('/api/v1/reviews', userReviewRoutes);
+app.use('/api/v1/videos', videoUploadRoutes);
+
+
 
 app.get('/api/v1/fashion-items/:id', (req, res) => {
   const { id } = req.params;
