@@ -8,28 +8,25 @@ const swaggerOptions: swaggerJsDoc.Options = {
     info: {
       title: "Fashion Item API Documentation",
       version: "1.0.0",
-      description: "API to manage fashion items, discounts, and brands in the store"
+      description: "API to manage fashion items, discounts, brands, and videos in the store"
     },
+    tags: [ // Added tags for filtering
+      { name: "Fashion Items", description: "Operations with fashion items" },
+      { name: "Discounts", description: "Discount management" },
+      { name: "Brands", description: "Brand operations" },
+      { name: "Videos", description: "Video upload and management" }
+    ],
     paths: {
-      // Existing paths for fashion items and discounts
       "/api/v1/fashion-items": {
         post: {
+          tags: ["Fashion Items"], // Added tag
           summary: "Create a new fashion item",
           requestBody: {
             required: true,
             content: {
               "application/json": {
                 schema: {
-                  type: "object",
-                  required: ["item_name", "brand", "category", "size", "price", "color"],
-                  properties: {
-                    item_name: { type: "string", example: "Floral Dress" },
-                    brand: { type: "string", example: "Zara" },
-                    category: { type: "string", example: "Dress" },
-                    size: { type: "string", example: "M" },
-                    price: { type: "string", example: "49.99" },
-                    color: { type: "string", example: "Pink" }
-                  }
+                  $ref: "#/components/schemas/FashionItem"
                 }
               }
             }
@@ -48,6 +45,7 @@ const swaggerOptions: swaggerJsDoc.Options = {
           }
         },
         get: {
+          tags: ["Fashion Items"], // Added tag
           summary: "Retrieve all fashion items",
           responses: {
             "200": {
@@ -71,24 +69,17 @@ const swaggerOptions: swaggerJsDoc.Options = {
           }
         }
       },
-      
-      // Existing paths for discounts
+
       "/api/v1/discounts": {
         post: {
+          tags: ["Discounts"], // Added tag
           summary: "Create a new discount",
           requestBody: {
             required: true,
             content: {
               "application/json": {
                 schema: {
-                  type: "object",
-                  required: ["percentage", "description", "startDate", "endDate"],
-                  properties: {
-                    percentage: { type: "string", example: "20%" },
-                    description: { type: "string", example: "Winter Sale" },
-                    startDate: { type: "string", example: "2025-12-01" },
-                    endDate: { type: "string", example: "2025-12-31" }
-                  }
+                  $ref: "#/components/schemas/Discount"
                 }
               }
             }
@@ -107,6 +98,7 @@ const swaggerOptions: swaggerJsDoc.Options = {
           }
         },
         get: {
+          tags: ["Discounts"], // Added tag
           summary: "Retrieve all discounts",
           responses: {
             "200": {
@@ -130,22 +122,17 @@ const swaggerOptions: swaggerJsDoc.Options = {
           }
         }
       },
+
       "/api/v1/brands": {
         post: {
+          tags: ["Brands"], // Added tag
           summary: "Create a new brand",
           requestBody: {
             required: true,
             content: {
               "application/json": {
                 schema: {
-                  type: "object",
-                  required: ["name", "country", "establishedYear", "description"],
-                  properties: {
-                    name: { type: "string", example: "Zara" },
-                    country: { type: "string", example: "Spain" },
-                    establishedYear: { type: "string", example: "1975" },
-                    description: { type: "string", example: "A global fashion retailer" }
-                  }
+                  $ref: "#/components/schemas/Brand"
                 }
               }
             }
@@ -164,6 +151,7 @@ const swaggerOptions: swaggerJsDoc.Options = {
           }
         },
         get: {
+          tags: ["Brands"], // Added tag
           summary: "Retrieve all brands",
           responses: {
             "200": {
@@ -187,95 +175,24 @@ const swaggerOptions: swaggerJsDoc.Options = {
           }
         }
       },
-      "/api/v1/brands/{id}": {
-        get: {
-          summary: "Retrieve a brand by ID",
-          parameters: [
-            {
-              in: "path",
-              name: "id",
-              required: true,
-              schema: { type: "string" },
-              description: "ID of the brand"
-            }
-          ],
-          responses: {
-            "200": {
-              description: "Brand found",
-              content: {
-                "application/json": {
-                  schema: {
-                    $ref: "#/components/schemas/Brand"
-                  }
-                }
-              }
-            },
-            "404": {
-              description: "Brand not found",
-              content: {
-                "application/json": {
-                  schema: {
-                    type: "object",
-                    properties: {
-                      message: {
-                        type: "string",
-                        example: "Brand not found"
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
-        put: {
-          summary: "Update a brand by ID",
-          parameters: [
-            {
-              in: "path",
-              name: "id",
-              required: true,
-              schema: { type: "string" },
-              description: "ID of the brand to update"
-            }
-          ],
+
+      "/api/v1/videos/upload": {
+        post: {
+          tags: ["Videos"], // Added tag
+          summary: "Upload a video",
           requestBody: {
             required: true,
             content: {
-              "application/json": {
+              "multipart/form-data": {
                 schema: {
-                  $ref: "#/components/schemas/Brand"
+                  $ref: "#/components/schemas/UploadVideo"
                 }
               }
             }
           },
           responses: {
             "200": {
-              description: "Brand updated successfully",
-              content: {
-                "application/json": {
-                  schema: {
-                    $ref: "#/components/schemas/Brand"
-                  }
-                }
-              }
-            }
-          }
-        },
-        delete: {
-          summary: "Delete a brand by ID",
-          parameters: [
-            {
-              in: "path",
-              name: "id",
-              required: true,
-              schema: { type: "string" },
-              description: "ID of the brand to delete"
-            }
-          ],
-          responses: {
-            "200": {
-              description: "Brand deleted successfully",
+              description: "Video uploaded successfully",
               content: {
                 "application/json": {
                   schema: {
@@ -283,8 +200,65 @@ const swaggerOptions: swaggerJsDoc.Options = {
                     properties: {
                       message: {
                         type: "string",
-                        example: "Brand deleted successfully."
-                      }
+                        example: "Video uploaded successfully"
+                      },
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              description: "Bad request",
+              content: {
+                "application/json": {
+                  schema: {
+                    type: "object",
+                    properties: {
+                      message: { type: "string", example: "Invalid video file" }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+
+      "/api/v1/videos/{id}": {
+        delete: {
+          tags: ["Videos"], // Added tag
+          summary: "Delete a video by ID",
+          parameters: [
+            {
+              in: "path",
+              name: "videoId",
+              required: true,
+              schema: { type: "string" },
+              description: "ID of the video to delete"
+            }
+          ],
+          responses: {
+            "200": {
+              description: "Video deleted successfully",
+              content: {
+                "application/json": {
+                  schema: {
+                    type: "object",
+                    properties: {
+                      message: { type: "string", example: "Video deleted successfully" }
+                    }
+                  }
+                }
+              }
+            },
+            "404": {
+              description: "Video not found",
+              content: {
+                "application/json": {
+                  schema: {
+                    type: "object",
+                    properties: {
+                      message: { type: "string", example: "Video not found" }
                     }
                   }
                 }
@@ -296,11 +270,9 @@ const swaggerOptions: swaggerJsDoc.Options = {
     },
     components: {
       schemas: {
-        // Existing schemas for FashionItem and Discount
         FashionItem: {
           type: "object",
           properties: {
-            id: { type: "string", example: "1" },
             item_name: { type: "string", example: "Floral Dress" },
             brand: { type: "string", example: "Zara" },
             category: { type: "string", example: "Dress" },
@@ -321,7 +293,6 @@ const swaggerOptions: swaggerJsDoc.Options = {
           },
           required: ["percentage", "description", "startDate", "endDate"]
         },
-        // New schema for Brand
         Brand: {
           type: "object",
           properties: {
@@ -332,6 +303,33 @@ const swaggerOptions: swaggerJsDoc.Options = {
             description: { type: "string", example: "A global fashion retailer" }
           },
           required: ["name", "country", "establishedYear", "description"]
+        },
+        UploadVideo: {
+          type: "object",
+          properties: {
+            username: { type: "string", example: "john_doe" },
+            itemId: { type: "string", example: "123" },
+            uploadDate: { type: "string", example: "2025-04-10" },
+            feedback: { type: "string", example: "Great material and color!" },
+            file: {
+              type: "string",
+              format: "binary",
+              description: "Video file to be uploaded"
+            }
+          },
+          required: ["username", "itemId", "uploadDate", "file", "feedback"]
+        },
+        UserReview: {
+          type: "object",
+          properties: {
+            id: { type: "string", example: "1" },
+            username: { type: "string", example: "john_doe" },
+            itemId: { type: "string", example: "12345" },
+            rating: { type: "integer", example: 4 },
+            comment: { type: "string", example: "Loved the fabric and fit!" },
+            createdAt: { type: "string", example: "2025-04-10T12:00:00Z" }
+          },
+          required: ["username", "itemId", "rating", "comment"]
         }
       }
     }
@@ -342,7 +340,11 @@ const swaggerOptions: swaggerJsDoc.Options = {
 const swaggerDocs = swaggerJsDoc(swaggerOptions);
 
 const setSwagger = (app: Express) => {
-  app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
+  app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs, {
+    swaggerOptions: {
+      filter: true // This enables the filter/search box
+    }
+  }));
 };
 
 export default setSwagger;

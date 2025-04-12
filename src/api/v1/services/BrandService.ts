@@ -1,4 +1,4 @@
-import { Brand } from '../models/BrandModel';  // Assuming you have a Brand model similar to Discount
+import { Brand } from '../models/BrandModel';  
 import { db } from "../../../../config/firebaseConfig";  // Your Firebase config
 import { 
   createDocument, 

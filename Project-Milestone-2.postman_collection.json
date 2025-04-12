@@ -1,0 +1,679 @@
+{
+	"info": {
+		"_postman_id": "6e23e309-7cdf-43a0-9554-e9034035f4cc",
+		"name": "Project-Milestone-2",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "41144546"
+	},
+	"item": [
+		{
+			"name": "Fashion Items",
+			"item": [
+				{
+					"name": "Create a Fashion Item",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"item_name\": \"Floral Dress\",\r\n  \"brand\": \"Zara\",\r\n  \"category\": \"Dress\",\r\n  \"size\": \"M\",\r\n  \"price\": \"49.99\",\r\n  \"color\": \"Pink\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/fashion-items",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"fashion-items"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Retrieve all Fashion Items",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/v1/fashion-items",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"fashion-items"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get a Fashion Item by ID",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/v1/fashion-items/qn1Z9hYKaOJEp8GMs0ol",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"fashion-items",
+								"qn1Z9hYKaOJEp8GMs0ol"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update a Fashion Item by ID",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"item_name\": \"Floral Dress\",\r\n  \"brand\": \"Zara\",\r\n  \"category\": \"Dress\",\r\n  \"size\": \"L\",\r\n  \"price\": \"59.99\",\r\n  \"color\": \"Pink\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/fashion-items/qn1Z9hYKaOJEp8GMs0ol",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"fashion-items",
+								"qn1Z9hYKaOJEp8GMs0ol"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete a Fashion Item by ID",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/v1/fashion-items/1UKrR2ur6MHNXrPfRQW1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"fashion-items",
+								"1UKrR2ur6MHNXrPfRQW1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Discounts",
+			"item": [
+				{
+					"name": "Create a New Discount",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": \"1\",\r\n  \"percentage\": \"20%\",\r\n  \"description\": \"Winter Sale\",\r\n  \"startDate\": \"2025-12-01\",\r\n  \"endDate\": \"2025-12-31\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/discounts",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"discounts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Retrieve all Discounts",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/v1/discounts",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"discounts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get a Discount by ID",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/v1/discounts/XzJ3se00iRq2rKEjzwvj",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"discounts",
+								"XzJ3se00iRq2rKEjzwvj"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update a Discount by ID",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"percentage\": \"25%\",\r\n  \"description\": \"Spring Sale\",\r\n  \"startDate\": \"2026-03-01\",\r\n  \"endDate\": \"2026-03-31\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/discounts/XzJ3se00iRq2rKEjzwvj",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"discounts",
+								"XzJ3se00iRq2rKEjzwvj"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete a Discount by ID",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/v1/discounts/ctoJgro0I2E2THJrxczd",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"discounts",
+								"ctoJgro0I2E2THJrxczd"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Brands",
+			"item": [
+				{
+					"name": "Create a New Brand",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": \"1\",\r\n  \"name\": \"Zara\",\r\n  \"country\": \"Spain\",\r\n  \"establishedYear\": \"1975\",\r\n  \"description\": \"A global fashion retailer\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/brands",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"brands"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Retrieve all Brands",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/v1/brands",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"brands"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get a Brand by ID",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/v1/brands/cP5e8vWmLWLRFaeNZTV1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"brands",
+								"cP5e8vWmLWLRFaeNZTV1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update a Brand by ID",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Adidas\",\r\n  \"country\": \"Germany\",\r\n  \"establishedYear\": \"1949\",\r\n  \"description\": \"Internationally recognized sports brand\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/brands/cP5e8vWmLWLRFaeNZTV1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"brands",
+								"cP5e8vWmLWLRFaeNZTV1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete a Brand by ID",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/v1/brands/z34hqVDKHVgme1ATcWaq",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"brands",
+								"z34hqVDKHVgme1ATcWaq"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Videos",
+			"item": [
+				{
+					"name": "Upload a Video",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "username",
+									"value": "john_doe",
+									"type": "text"
+								},
+								{
+									"key": "itemId",
+									"value": "123",
+									"type": "text"
+								},
+								{
+									"key": "uploadDate",
+									"value": "2025-04-10",
+									"type": "text"
+								},
+								{
+									"key": "feedback",
+									"value": "Great material and color!",
+									"type": "text"
+								},
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/rajve/Downloads/video-1744388519473-521192504 (2).mp4"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/videos/upload",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"videos",
+								"upload"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete a Video by ID",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/v1/videos/D6B8ef0CDhrwY4hGTce5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"videos",
+								"D6B8ef0CDhrwY4hGTce5"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User Reviews",
+			"item": [
+				{
+					"name": "Create a User Review",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"fashionItemId\": \"item123\",\r\n  \"userName\": \"JohnDoe\",\r\n  \"comment\": \"Amazing quality and fit!\",\r\n  \"rating\": \"5\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/reviews",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"reviews"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All User Reviews",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/v1/reviews",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"reviews"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get a User Review by ID",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/v1/reviews/x0GgABLRH1GjRi7PUzui",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"reviews",
+								"x0GgABLRH1GjRi7PUzui"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update a User Review by ID",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"comment\": \"Updated comment text.\",\r\n  \"rating\": \"4\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/reviews/x0GgABLRH1GjRi7PUzui",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"reviews",
+								"x0GgABLRH1GjRi7PUzui"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete a User review by ID",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/v1/reviews/R2YTpLMPKavNlhWk7xDO",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"reviews",
+								"R2YTpLMPKavNlhWk7xDO"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
