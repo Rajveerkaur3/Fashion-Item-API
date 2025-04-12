@@ -9,7 +9,7 @@ jest.mock('../config/firebaseConfig', () => ({
       where: jest.fn(),
     }
   }));
-  
+
 
 import request from 'supertest';
 import express, { Application } from 'express';
