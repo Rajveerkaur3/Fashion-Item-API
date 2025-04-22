@@ -10,6 +10,8 @@ import discountRoutes from './api/v1/routes/Discountroutes';
 import brandRoutes from './api/v1/routes/BrandRoutes';
 import userReviewRoutes from './api/v1/routes/UserReviewRoutes';
 import videoUploadRoutes from './api/v1/routes/VideoUploadRoutes';
+import userRoutes from "./api/v1/routes/userRoutes";
+import adminRoutes from "./api/v1/routes/adminRoutes";
 
 
 // Import Swagger setup
@@ -40,6 +42,8 @@ app.use('/api/v1/discounts', discountRoutes);
 app.use('/api/v1/brands', brandRoutes);
 app.use('/api/v1/reviews', userReviewRoutes);
 app.use('/api/v1/videos', videoUploadRoutes);
+app.use("/api/v1/users", userRoutes);
+app.use("/api/v1/admin", adminRoutes);
 
 
 
