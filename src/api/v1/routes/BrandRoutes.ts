@@ -1,9 +1,11 @@
-import express, { Request, Response } from 'express';
-import { validateRequest } from "../middleware/ValidateBrand"; // Assuming you have a middleware for validation
-import { brandSchema, updateBrandSchema } from "../validations/BrandValidation"; // Assuming you have a schema validation
-import * as brandController from '../controllers/BrandController';  
+import express, { Router } from 'express';
+import * as brandController from '../controllers/BrandController';
+import { validateRequest } from "../middleware/ValidateBrand"; 
+import { brandSchema, updateBrandSchema } from "../validations/BrandValidation"; 
+import authenticate from "../middleware/authenticate";
+import isAuthorized from "../middleware/authorize"; 
 
-const router = express.Router();
+const router: Router = express.Router();
 
 /**
  * @openapi
@@ -45,6 +47,13 @@ const router = express.Router();
  *             schema:
  *               $ref: '#/components/schemas/Brand'
  */
+router.post(
+  '/',
+  authenticate, 
+  isAuthorized({ hasRole: ['admin'] }),
+  validateRequest(brandSchema), 
+  brandController.createBrand
+);
 
 /**
  * @openapi
@@ -64,6 +73,7 @@ const router = express.Router();
  *               items:
  *                 $ref: '#/components/schemas/Brand'
  */
+router.get('/', authenticate, brandController.getAllBrands);
 
 /**
  * @openapi
@@ -88,6 +98,7 @@ const router = express.Router();
  *             schema:
  *               $ref: '#/components/schemas/Brand'
  */
+router.get('/:id', authenticate, brandController.getBrandById);
 
 /**
  * @openapi
@@ -131,6 +142,13 @@ const router = express.Router();
  *             schema:
  *               $ref: '#/components/schemas/Brand'
  */
+router.put(
+  '/:id',
+  authenticate, 
+  isAuthorized({ hasRole: ['admin'] }),
+  validateRequest(updateBrandSchema), 
+  brandController.updateBrand
+);
 
 /**
  * @openapi
@@ -159,12 +177,11 @@ const router = express.Router();
  *                   type: string
  *                   example: "Brand deleted successfully."
  */
-
-// Define the routes with validation
-router.post('/', validateRequest(brandSchema), brandController.createBrand);
-router.get('/', brandController.getAllBrands);
-router.get('/:id', brandController.getBrandById);
-router.put('/:id', validateRequest(updateBrandSchema), brandController.updateBrand);
-router.delete('/:id', brandController.deleteBrand);
+router.delete(
+  '/:id',
+  authenticate, 
+  isAuthorized({ hasRole: ['admin'] }), 
+  brandController.deleteBrand
+);
 
 export default router;
