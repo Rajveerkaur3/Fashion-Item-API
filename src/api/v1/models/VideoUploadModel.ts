@@ -1,7 +1,7 @@
 import { Request } from 'express';
 
 // Define the VideoUpload interface
-export interface VideoUpload {
+export interface VideoUpload {  
   username: string;
   itemId: string;
   uploadDate: string;
