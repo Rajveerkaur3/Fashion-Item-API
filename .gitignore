@@ -2,8 +2,8 @@ node_modules/
 dist/
 .vscode/
 
-project---fashion-item-api-firebase-adminsdk-fbsvc-39755f1409.json
+project---fashion-item-api-firebase-adminsdk-fbsvc-40dcb29851.json
 
 uploads/videos/
 
-
+.env
