@@ -1,26 +1,18 @@
-import { initializeApp, cert, ServiceAccount } from "firebase-admin/app";
-import { getFirestore, Firestore } from "firebase-admin/firestore";
+import { initializeApp, cert, ServiceAccount, getApps } from "firebase-admin/app";
+import { getFirestore } from "firebase-admin/firestore";
+import { getAuth } from "firebase-admin/auth";
 
-let db: Firestore;
+const serviceAccount = require("../project---fashion-item-api-firebase-adminsdk-fbsvc-39755f1409.json");
 
-if (process.env.NODE_ENV === 'test') {
-  // Mock configuration for tests
-  db = {
-    collection: jest.fn() as any
-  } as Firestore;
-} else {
-  // Real configuration for development/production
-  import("../project---fashion-item-api-firebase-adminsdk-fbsvc-40dcb29851.json")
-    .then(serviceAccount => {
-      initializeApp({
-        credential: cert(serviceAccount as ServiceAccount),
-      });
-      db = getFirestore();
-    })
-    .catch(error => {
-      console.error("Firebase initialization error:", error);
-      process.exit(1);
-    });
+
+// Initialize only once
+if (getApps().length === 0) {
+  initializeApp({
+    credential: cert(serviceAccount as ServiceAccount),
+  });
 }
 
-export { db };
+const db = getFirestore();
+const auth = getAuth();
+
+export { db, auth };
