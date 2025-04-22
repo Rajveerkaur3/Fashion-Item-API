@@ -17,6 +17,7 @@
     "@types/mongoose": "^5.11.96",
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
+    "emoji-picker-react": "^4.12.2",
     "express": "^5.1.0",
     "firebase": "^11.6.0",
     "firebase-admin": "^13.2.0",
