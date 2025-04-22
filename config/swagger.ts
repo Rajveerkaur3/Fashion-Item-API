@@ -200,7 +200,7 @@ const swaggerOptions: swaggerJsDoc.Options = {
                     properties: {
                       message: {
                         type: "string",
-                        example: "Video uploaded successfully"
+                        example: "Video uploaded successfully 😊🔥"
                       },
                     }
                   }
@@ -310,7 +310,7 @@ const swaggerOptions: swaggerJsDoc.Options = {
             username: { type: "string", example: "john_doe" },
             itemId: { type: "string", example: "123" },
             uploadDate: { type: "string", example: "2025-04-10" },
-            feedback: { type: "string", example: "Great material and color!" },
+            feedback: { type: "string", example: "Great material and color! 😊🔥" },
             file: {
               type: "string",
               format: "binary",
@@ -334,6 +334,55 @@ const swaggerOptions: swaggerJsDoc.Options = {
       }
     }
   },
+  "/api/v1/videos/filter/item/{itemId}": {
+  get: {
+    tags: ["Videos"], // Added tag
+    summary: "Retrieve videos by item ID",
+    parameters: [
+      {
+        in: "path",
+        name: "itemId",
+        required: true,
+        schema: { type: "string" },
+        description: "ID of the item to retrieve associated videos"
+      }
+    ],
+    responses: {
+      "200": {
+        description: "A list of videos associated with the item ID",
+        content: {
+          "application/json": {
+            schema: {
+              type: "object",
+              properties: {
+                videos: {
+                  type: "array",
+                  items: {
+                    $ref: "#/components/schemas/UploadVideo"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "404": {
+        description: "No videos found for the given item ID",
+        content: {
+          "application/json": {
+            schema: {
+              type: "object",
+              properties: {
+                message: { type: "string", example: "No videos found for item ID" }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+},
+
   apis: ["./src/api/v1/routes/*.ts", "./src/api/v1/controllers/*.ts"]
 };
 
