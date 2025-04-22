@@ -1,8 +1,8 @@
-import express, { Request, Response } from 'express';
+import express from 'express';
 import { upload } from "../../../../config/multer.config";  
 import { validateRequest } from "../middleware/ValidateUploadVideo";
 import { videoUploadSchema, deleteVideoSchema } from "../validations/UploadVideoValidation";
-import * as videoController from '../controllers/VideoUploadController';
+import videoController from '../controllers/VideoUploadController'; // Default import
 
 const router = express.Router();
 
@@ -71,17 +71,6 @@ const router = express.Router();
  *                       example: 5242880
  *       '400':
  *         description: Bad request
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 error:
- *                   type: string
- *                   example: "File processing failed"
- *                 details:
- *                   type: string
- *                   example: "File must be MP4/MOV and under 100MB"
  *       '413':
  *         description: File too large
  *       '500':
@@ -111,17 +100,41 @@ const router = express.Router();
  *         description: Video not found
  */
 
-// Enhanced upload route with debugging
+/**
+ * @openapi
+ * /api/v1/videos/filter/item/{itemId}:
+ *   get:
+ *     summary: Get videos by Item ID
+ *     operationId: getVideosByItemId
+ *     tags:
+ *       - Videos
+ *     parameters:
+ *       - name: itemId
+ *         in: path
+ *         required: true
+ *         description: The item ID to filter videos by
+ *         schema:
+ *           type: string
+ *           example: "123"
+ *     responses:
+ *       '200':
+ *         description: A list of videos filtered by item ID
+ *       '404':
+ *         description: No videos found for the provided item ID
+ *       '500':
+ *         description: Server error
+ */
+
 router.post(
   '/upload',
-  upload.single('file'),  // File processing first
+  upload.single('file'), 
   (req, res, next) => {
     console.log('Multer processed file:', req.file);
     console.log('Request body fields:', {
       username: req.body.username,
       itemId: req.body.itemId,
       uploadDate: req.body.uploadDate,
-      feedback: req.body.feedback  // New field
+      feedback: req.body.feedback
     });
     next();
   },
@@ -133,6 +146,11 @@ router.delete(
   '/:id', 
   validateRequest(deleteVideoSchema), 
   videoController.deleteVideo
+);
+
+router.get(
+  '/filter/item/:itemId',
+  videoController.getVideosByItemIdHandler
 );
 
 export default router;
