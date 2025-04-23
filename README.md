@@ -63,3 +63,6 @@ http://localhost:3000/api-docs/#/
 Run the tests to ensure everything is functioning as expected:
 
 npm run test
+
+For Video:
+http://localhost:3000/uploads/videos/video-1744443568568-868038931.mp4

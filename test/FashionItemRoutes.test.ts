@@ -4,7 +4,6 @@ import bodyParser from 'body-parser';
 import fashionItemRoutes from '../src/api/v1/routes/FashionItemRoutes';
 import { Request, Response, NextFunction } from 'express';
 
-
 // Mock controllers
 jest.mock('../src/api/v1/controllers/FashionItemController', () => ({
   createFashionItem: jest.fn((req, res) => res.status(201).json({ message: 'Created' })),
@@ -14,10 +13,19 @@ jest.mock('../src/api/v1/controllers/FashionItemController', () => ({
   deleteFashionItem: jest.fn((req, res) => res.status(200).json({ message: 'Deleted' })),
 }));
 
-// Mock middleware
+// Mock validation middleware
 jest.mock('../src/api/v1/middleware/ValidateFashionItem', () => ({
-    validateRequest: () => (req: Request, res: Response, next: NextFunction) => next()
+  validateRequest: () => (req: Request, res: Response, next: NextFunction) => next()
 }));
+
+// ✅ Mock auth middleware
+jest.mock('../src/api/v1/middleware/authenticate', () => 
+  (req: Request, res: Response, next: NextFunction) => next()
+);
+
+jest.mock('../src/api/v1/middleware/authorize', () => 
+  () => (req: Request, res: Response, next: NextFunction) => next()
+);
 
 const app = express();
 app.use(bodyParser.json());

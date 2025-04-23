@@ -1,8 +1,7 @@
 import request from 'supertest';
 import express from 'express';
 import bodyParser from 'body-parser';
-import brandRoutes from '../src/api/v1/routes/BrandRoutes'; // Adjust the import path based on your project structure
-
+import brandRoutes from '../src/api/v1/routes/BrandRoutes'; // Adjust the import path if needed
 import { Request, Response, NextFunction } from 'express';
 
 // Mock controllers
@@ -14,11 +13,24 @@ jest.mock('../src/api/v1/controllers/BrandController', () => ({
   deleteBrand: jest.fn((req, res) => res.status(200).json({ message: 'Brand deleted' })),
 }));
 
-// Mock middleware
+// Mock validation middleware
 jest.mock('../src/api/v1/middleware/ValidateBrand', () => ({
   validateRequest: () => (req: Request, res: Response, next: NextFunction) => next(),
 }));
 
+// Mock authentication middleware
+jest.mock('../src/api/v1/middleware/authenticate', () => ({
+  __esModule: true,
+  default: (req: Request, res: Response, next: NextFunction) => next(),
+}));
+
+// Mock authorization middleware
+jest.mock('../src/api/v1/middleware/authorize', () => ({
+  __esModule: true,
+  default: () => (req: Request, res: Response, next: NextFunction) => next(),
+}));
+
+// Setup app
 const app = express();
 app.use(bodyParser.json());
 app.use('/api/v1/brands', brandRoutes);
