@@ -1,0 +1,558 @@
+{
+	"info": {
+		"_postman_id": "aeb9e38b-c156-41dd-9254-5db1e80707a8",
+		"name": "Project-Milestone-3",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "41144546"
+	},
+	"item": [
+		{
+			"name": "getToken",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"email\": \"rajveerca0211@gmail.com\",\r\n  \"password\": \"Rajveer Kaur\",\r\n  \"returnSecureToken\": true\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyD7zYNjBAePb0AzKfTKncyOd9pcT03pT9I\n",
+					"protocol": "https",
+					"host": [
+						"identitytoolkit",
+						"googleapis",
+						"com"
+					],
+					"path": [
+						"v1",
+						"accounts:signInWithPassword"
+					],
+					"query": [
+						{
+							"key": "key",
+							"value": "AIzaSyD7zYNjBAePb0AzKfTKncyOd9pcT03pT9I\n"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "setCustomClaims",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "bearer eyJhbGciOiJSUzI1NiIsImtpZCI6Ijg1NzA4MWNhOWNiYjM3YzIzNDk4ZGQzOTQzYmYzNzFhMDU4ODNkMjgiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vcHJvamVjdC0tLWZhc2hpb24taXRlbS1hcGkiLCJhdWQiOiJwcm9qZWN0LS0tZmFzaGlvbi1pdGVtLWFwaSIsImF1dGhfdGltZSI6MTc0NTEyMTI5MiwidXNlcl9pZCI6IklhM29CQTJZTFpVRzJyM3J0UjNmc0YwemZyMTIiLCJzdWIiOiJJYTNvQkEyWUxaVUcycjNydFIzZnNGMHpmcjEyIiwiaWF0IjoxNzQ1MTIxMjkyLCJleHAiOjE3NDUxMjQ4OTIsImVtYWlsIjoicmFqdmVlcmNhMDIxMUBnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsicmFqdmVlcmNhMDIxMUBnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.lV6wdnGWX89mxdTzjAhQhsMIXM0PPsJpGAsAOVAtKBAhu8sq8kQ7oWKzGOuraTErjMZO_LunGXH95StLBUKebTgVtIrSzWCr8N30-SFxi8RZOq7ZCD9N_0WTAMHAL9gf-Q9ImmcyMtCuZfGLqMQpuFrIDsxIw3SI1WMZDshAKAJvA8FV1r3sXrDkGMrOaEqR-ZgBQP2LvRA58vRSmAqvrbCh7xDFnki7jCr-qSnrB_kN40egUFn98g_AHE2D62XuaDxvs9974IHQEKKhTs6RwfqztXw_lkjwKgR2jDe4i9ERD5XkPSYo3tSISuUugslpGFXlOhq2sDthqcmtKBT7jQ",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"uid\": \"Ia3oBA2YLZUG2r3rtR3fsF0zfr12\",\r\n\"claims\": {\r\n\"role\": \"admin\"\r\n}\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v1/admin/setCustomClaims",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"admin",
+						"setCustomClaims"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create a Fashion Item",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "bearer eyJhbGciOiJSUzI1NiIsImtpZCI6Ijg1NzA4MWNhOWNiYjM3YzIzNDk4ZGQzOTQzYmYzNzFhMDU4ODNkMjgiLCJ0eXAiOiJKV1QifQ.eyJyb2xlIjoiYWRtaW4iLCJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vcHJvamVjdC0tLWZhc2hpb24taXRlbS1hcGkiLCJhdWQiOiJwcm9qZWN0LS0tZmFzaGlvbi1pdGVtLWFwaSIsImF1dGhfdGltZSI6MTc0NTEzMzM3NywidXNlcl9pZCI6IklhM29CQTJZTFpVRzJyM3J0UjNmc0YwemZyMTIiLCJzdWIiOiJJYTNvQkEyWUxaVUcycjNydFIzZnNGMHpmcjEyIiwiaWF0IjoxNzQ1MTMzMzc3LCJleHAiOjE3NDUxMzY5NzcsImVtYWlsIjoicmFqdmVlcmNhMDIxMUBnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsicmFqdmVlcmNhMDIxMUBnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.HRXs9PqrMxW51m0wnFVUD8ze3EZQFK9lSDWaZU7uXru4e27ijPNoRB3APfttFwzjGVMf4tveg_bdqU3lL-JGNFn8DSZt_7ZUu9uMQlzYy98hquUHG1bgeENyDuAMoNgyIygWz17VzSH7o-_EFVlpINISVr720IesJbY6II5GGlsYflKPzSEP_oECFstBNOUGjXru83DZBueeHgnZih_06VsDKj_DJRKTRxyonFED3bdlCHz0mmFeJe0a9r1Cma3nybptUpgtcexObeJh7rqgYkCztCTmfKm_07lU7XsTWS0gM6fo8whkSNovn7AWaYmNMj9OKVF3aKhhS4UOFVY6oQ",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"item_name\": \"Floral Dress\",\r\n  \"brand\": \"Zara\",\r\n  \"category\": \"Dress\",\r\n  \"size\": \"M\",\r\n  \"price\": \"49.99\",\r\n  \"color\": \"Pink\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v1/fashion-items",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"fashion-items"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Fashion Items",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "bearer eyJhbGciOiJSUzI1NiIsImtpZCI6Ijg1NzA4MWNhOWNiYjM3YzIzNDk4ZGQzOTQzYmYzNzFhMDU4ODNkMjgiLCJ0eXAiOiJKV1QifQ.eyJyb2xlIjoiYWRtaW4iLCJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vcHJvamVjdC0tLWZhc2hpb24taXRlbS1hcGkiLCJhdWQiOiJwcm9qZWN0LS0tZmFzaGlvbi1pdGVtLWFwaSIsImF1dGhfdGltZSI6MTc0NTEzMzM3NywidXNlcl9pZCI6IklhM29CQTJZTFpVRzJyM3J0UjNmc0YwemZyMTIiLCJzdWIiOiJJYTNvQkEyWUxaVUcycjNydFIzZnNGMHpmcjEyIiwiaWF0IjoxNzQ1MTMzMzc3LCJleHAiOjE3NDUxMzY5NzcsImVtYWlsIjoicmFqdmVlcmNhMDIxMUBnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsicmFqdmVlcmNhMDIxMUBnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.HRXs9PqrMxW51m0wnFVUD8ze3EZQFK9lSDWaZU7uXru4e27ijPNoRB3APfttFwzjGVMf4tveg_bdqU3lL-JGNFn8DSZt_7ZUu9uMQlzYy98hquUHG1bgeENyDuAMoNgyIygWz17VzSH7o-_EFVlpINISVr720IesJbY6II5GGlsYflKPzSEP_oECFstBNOUGjXru83DZBueeHgnZih_06VsDKj_DJRKTRxyonFED3bdlCHz0mmFeJe0a9r1Cma3nybptUpgtcexObeJh7rqgYkCztCTmfKm_07lU7XsTWS0gM6fo8whkSNovn7AWaYmNMj9OKVF3aKhhS4UOFVY6oQ",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/api/v1/fashion-items",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"fashion-items"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get a Fashion Item by ID",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "bearer eyJhbGciOiJSUzI1NiIsImtpZCI6Ijg1NzA4MWNhOWNiYjM3YzIzNDk4ZGQzOTQzYmYzNzFhMDU4ODNkMjgiLCJ0eXAiOiJKV1QifQ.eyJyb2xlIjoiYWRtaW4iLCJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vcHJvamVjdC0tLWZhc2hpb24taXRlbS1hcGkiLCJhdWQiOiJwcm9qZWN0LS0tZmFzaGlvbi1pdGVtLWFwaSIsImF1dGhfdGltZSI6MTc0NTEzMzM3NywidXNlcl9pZCI6IklhM29CQTJZTFpVRzJyM3J0UjNmc0YwemZyMTIiLCJzdWIiOiJJYTNvQkEyWUxaVUcycjNydFIzZnNGMHpmcjEyIiwiaWF0IjoxNzQ1MTMzMzc3LCJleHAiOjE3NDUxMzY5NzcsImVtYWlsIjoicmFqdmVlcmNhMDIxMUBnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsicmFqdmVlcmNhMDIxMUBnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.HRXs9PqrMxW51m0wnFVUD8ze3EZQFK9lSDWaZU7uXru4e27ijPNoRB3APfttFwzjGVMf4tveg_bdqU3lL-JGNFn8DSZt_7ZUu9uMQlzYy98hquUHG1bgeENyDuAMoNgyIygWz17VzSH7o-_EFVlpINISVr720IesJbY6II5GGlsYflKPzSEP_oECFstBNOUGjXru83DZBueeHgnZih_06VsDKj_DJRKTRxyonFED3bdlCHz0mmFeJe0a9r1Cma3nybptUpgtcexObeJh7rqgYkCztCTmfKm_07lU7XsTWS0gM6fo8whkSNovn7AWaYmNMj9OKVF3aKhhS4UOFVY6oQ",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/api/v1/fashion-items/zdM1tGZTNUMBiHu9TF0l",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"fashion-items",
+						"zdM1tGZTNUMBiHu9TF0l"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update a Fashion Item",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "bearer eyJhbGciOiJSUzI1NiIsImtpZCI6Ijg1NzA4MWNhOWNiYjM3YzIzNDk4ZGQzOTQzYmYzNzFhMDU4ODNkMjgiLCJ0eXAiOiJKV1QifQ.eyJyb2xlIjoiYWRtaW4iLCJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vcHJvamVjdC0tLWZhc2hpb24taXRlbS1hcGkiLCJhdWQiOiJwcm9qZWN0LS0tZmFzaGlvbi1pdGVtLWFwaSIsImF1dGhfdGltZSI6MTc0NTEzMzM3NywidXNlcl9pZCI6IklhM29CQTJZTFpVRzJyM3J0UjNmc0YwemZyMTIiLCJzdWIiOiJJYTNvQkEyWUxaVUcycjNydFIzZnNGMHpmcjEyIiwiaWF0IjoxNzQ1MTMzMzc3LCJleHAiOjE3NDUxMzY5NzcsImVtYWlsIjoicmFqdmVlcmNhMDIxMUBnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsicmFqdmVlcmNhMDIxMUBnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.HRXs9PqrMxW51m0wnFVUD8ze3EZQFK9lSDWaZU7uXru4e27ijPNoRB3APfttFwzjGVMf4tveg_bdqU3lL-JGNFn8DSZt_7ZUu9uMQlzYy98hquUHG1bgeENyDuAMoNgyIygWz17VzSH7o-_EFVlpINISVr720IesJbY6II5GGlsYflKPzSEP_oECFstBNOUGjXru83DZBueeHgnZih_06VsDKj_DJRKTRxyonFED3bdlCHz0mmFeJe0a9r1Cma3nybptUpgtcexObeJh7rqgYkCztCTmfKm_07lU7XsTWS0gM6fo8whkSNovn7AWaYmNMj9OKVF3aKhhS4UOFVY6oQ",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"item_name\": \"Floral Dress\",\r\n  \"brand\": \"Zara\",\r\n  \"category\": \"Dress\",\r\n  \"size\": \"L\",\r\n  \"price\": \"59.99\",\r\n  \"color\": \"Pink\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v1/fashion-items/zdM1tGZTNUMBiHu9TF0l",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"fashion-items",
+						"zdM1tGZTNUMBiHu9TF0l"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete a Fashion Item",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "bearer eyJhbGciOiJSUzI1NiIsImtpZCI6Ijg1NzA4MWNhOWNiYjM3YzIzNDk4ZGQzOTQzYmYzNzFhMDU4ODNkMjgiLCJ0eXAiOiJKV1QifQ.eyJyb2xlIjoiYWRtaW4iLCJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vcHJvamVjdC0tLWZhc2hpb24taXRlbS1hcGkiLCJhdWQiOiJwcm9qZWN0LS0tZmFzaGlvbi1pdGVtLWFwaSIsImF1dGhfdGltZSI6MTc0NTEzMzM3NywidXNlcl9pZCI6IklhM29CQTJZTFpVRzJyM3J0UjNmc0YwemZyMTIiLCJzdWIiOiJJYTNvQkEyWUxaVUcycjNydFIzZnNGMHpmcjEyIiwiaWF0IjoxNzQ1MTMzMzc3LCJleHAiOjE3NDUxMzY5NzcsImVtYWlsIjoicmFqdmVlcmNhMDIxMUBnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsicmFqdmVlcmNhMDIxMUBnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.HRXs9PqrMxW51m0wnFVUD8ze3EZQFK9lSDWaZU7uXru4e27ijPNoRB3APfttFwzjGVMf4tveg_bdqU3lL-JGNFn8DSZt_7ZUu9uMQlzYy98hquUHG1bgeENyDuAMoNgyIygWz17VzSH7o-_EFVlpINISVr720IesJbY6II5GGlsYflKPzSEP_oECFstBNOUGjXru83DZBueeHgnZih_06VsDKj_DJRKTRxyonFED3bdlCHz0mmFeJe0a9r1Cma3nybptUpgtcexObeJh7rqgYkCztCTmfKm_07lU7XsTWS0gM6fo8whkSNovn7AWaYmNMj9OKVF3aKhhS4UOFVY6oQ",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/api/v1/fashion-items/zdM1tGZTNUMBiHu9TF0l",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"fashion-items",
+						"zdM1tGZTNUMBiHu9TF0l"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getToken",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"email\": \"rajveerca@gmail.com\",\r\n  \"password\": \"Rajveer\",\r\n  \"returnSecureToken\": true\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyD7zYNjBAePb0AzKfTKncyOd9pcT03pT9I",
+					"protocol": "https",
+					"host": [
+						"identitytoolkit",
+						"googleapis",
+						"com"
+					],
+					"path": [
+						"v1",
+						"accounts:signInWithPassword"
+					],
+					"query": [
+						{
+							"key": "key",
+							"value": "AIzaSyD7zYNjBAePb0AzKfTKncyOd9pcT03pT9I"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "setCustomClaims",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6Ijg1NzA4MWNhOWNiYjM3YzIzNDk4ZGQzOTQzYmYzNzFhMDU4ODNkMjgiLCJ0eXAiOiJKV1QifQ.eyJyb2xlIjoiYWRtaW4iLCJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vcHJvamVjdC0tLWZhc2hpb24taXRlbS1hcGkiLCJhdWQiOiJwcm9qZWN0LS0tZmFzaGlvbi1pdGVtLWFwaSIsImF1dGhfdGltZSI6MTc0NTE2NjMxOCwidXNlcl9pZCI6IjF5enpwZ1Z0MXlTUkNUVDBsYXFUOXFZS0I2cDEiLCJzdWIiOiIxeXp6cGdWdDF5U1JDVFQwbGFxVDlxWUtCNnAxIiwiaWF0IjoxNzQ1MTY2MzE4LCJleHAiOjE3NDUxNjk5MTgsImVtYWlsIjoicmFqdmVlcmNhQGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwiZmlyZWJhc2UiOnsiaWRlbnRpdGllcyI6eyJlbWFpbCI6WyJyYWp2ZWVyY2FAZ21haWwuY29tIl19LCJzaWduX2luX3Byb3ZpZGVyIjoicGFzc3dvcmQifX0.wLGCZ53qTNCPOLDsokZBiSZGr9v4eLVwtYI6M7d32EtEediB-6IyTBuml9TvfN95iXC6oUWPmm_-GY3u7iyFwSFWza8qn67It-Qxa_a3JINSFt5IoR79tDFxJ38dwHvpnXrDzyfon1yxhk34EUo_zuvMyO2rvA3ZVQJQdyybF2XhYPNgQXPrgiYYQyDIo-COdaWsoCZR-LC0MW2d9z84GCsSjQeg4tQpDPcM3hFpHCzfD473pwYn0H0cjLR8oLl6s0hkWVvsW67d6KFpyv3UC5SNn13L9ChEm0XfkYDVLydkJ3bXshRCSEMajI83AXigl5e30T5bufJBorBXpW4q_g",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"uid\": \"1yzzpgVt1ySRCTT0laqT9qYKB6p1\",\r\n\"claims\": {\r\n\"role\": \"admin\"\r\n}\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v1/admin/setCustomClaims",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"admin",
+						"setCustomClaims"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create a new Brand",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"content-type": true
+				}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6Ijg1NzA4MWNhOWNiYjM3YzIzNDk4ZGQzOTQzYmYzNzFhMDU4ODNkMjgiLCJ0eXAiOiJKV1QifQ.eyJyb2xlIjoiYWRtaW4iLCJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vcHJvamVjdC0tLWZhc2hpb24taXRlbS1hcGkiLCJhdWQiOiJwcm9qZWN0LS0tZmFzaGlvbi1pdGVtLWFwaSIsImF1dGhfdGltZSI6MTc0NTE2NjMxOCwidXNlcl9pZCI6IjF5enpwZ1Z0MXlTUkNUVDBsYXFUOXFZS0I2cDEiLCJzdWIiOiIxeXp6cGdWdDF5U1JDVFQwbGFxVDlxWUtCNnAxIiwiaWF0IjoxNzQ1MTY2MzE4LCJleHAiOjE3NDUxNjk5MTgsImVtYWlsIjoicmFqdmVlcmNhQGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwiZmlyZWJhc2UiOnsiaWRlbnRpdGllcyI6eyJlbWFpbCI6WyJyYWp2ZWVyY2FAZ21haWwuY29tIl19LCJzaWduX2luX3Byb3ZpZGVyIjoicGFzc3dvcmQifX0.wLGCZ53qTNCPOLDsokZBiSZGr9v4eLVwtYI6M7d32EtEediB-6IyTBuml9TvfN95iXC6oUWPmm_-GY3u7iyFwSFWza8qn67It-Qxa_a3JINSFt5IoR79tDFxJ38dwHvpnXrDzyfon1yxhk34EUo_zuvMyO2rvA3ZVQJQdyybF2XhYPNgQXPrgiYYQyDIo-COdaWsoCZR-LC0MW2d9z84GCsSjQeg4tQpDPcM3hFpHCzfD473pwYn0H0cjLR8oLl6s0hkWVvsW67d6KFpyv3UC5SNn13L9ChEm0XfkYDVLydkJ3bXshRCSEMajI83AXigl5e30T5bufJBorBXpW4q_g",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Nike\",\r\n  \"country\": \"USA\",\r\n  \"establishedYear\": \"1964\",\r\n  \"description\": \"Global sportswear brand\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v1/brands",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"brands"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all Brands",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6Ijg1NzA4MWNhOWNiYjM3YzIzNDk4ZGQzOTQzYmYzNzFhMDU4ODNkMjgiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vcHJvamVjdC0tLWZhc2hpb24taXRlbS1hcGkiLCJhdWQiOiJwcm9qZWN0LS0tZmFzaGlvbi1pdGVtLWFwaSIsImF1dGhfdGltZSI6MTc0NTE2NTMxNSwidXNlcl9pZCI6IjF5enpwZ1Z0MXlTUkNUVDBsYXFUOXFZS0I2cDEiLCJzdWIiOiIxeXp6cGdWdDF5U1JDVFQwbGFxVDlxWUtCNnAxIiwiaWF0IjoxNzQ1MTY1MzE1LCJleHAiOjE3NDUxNjg5MTUsImVtYWlsIjoicmFqdmVlcmNhQGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwiZmlyZWJhc2UiOnsiaWRlbnRpdGllcyI6eyJlbWFpbCI6WyJyYWp2ZWVyY2FAZ21haWwuY29tIl19LCJzaWduX2luX3Byb3ZpZGVyIjoicGFzc3dvcmQifX0.je6RcJEcpRR_N6tBXGgyF-oPfzpLoK16AOorXYMyjbEENoWM87tRowVqUwF4k5q7yIQqGb9ByhulLzrKcFS_8j1z9Om15Y67C9izfYgOYRwNkmN0b3KPqrsLvP0338_6PIDCm4w1HKn3FZlMcIzE85wVpvp-zzaTF2xyXH5yD10JGuRtyZaJDInASvGOYGf4WXUgVXjOL1K88g8M4dRKjuEZpzY7i9unIDI34UlcO1VZgOcJWS4omxb-6GUCpx6juT2AwRsH2YpvGrVNYluYnX7jERZyV7YhfzlH9eawhCRuuD41OFGXAf9ETWOnP8wtC8QOsDipMNNtRJ0YJT7kCQ",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/api/v1/brands",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"brands"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Brand by ID",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6IjkwOTg1NzhjNDg4MWRjMDVlYmYxOWExNWJhMjJkOGZkMWFiMzRjOGEiLCJ0eXAiOiJKV1QifQ.eyJyb2xlIjoiYWRtaW4iLCJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vcHJvamVjdC0tLWZhc2hpb24taXRlbS1hcGkiLCJhdWQiOiJwcm9qZWN0LS0tZmFzaGlvbi1pdGVtLWFwaSIsImF1dGhfdGltZSI6MTc0NTQzNDA1MSwidXNlcl9pZCI6IjF5enpwZ1Z0MXlTUkNUVDBsYXFUOXFZS0I2cDEiLCJzdWIiOiIxeXp6cGdWdDF5U1JDVFQwbGFxVDlxWUtCNnAxIiwiaWF0IjoxNzQ1NDM0MDUxLCJleHAiOjE3NDU0Mzc2NTEsImVtYWlsIjoicmFqdmVlcmNhQGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwiZmlyZWJhc2UiOnsiaWRlbnRpdGllcyI6eyJlbWFpbCI6WyJyYWp2ZWVyY2FAZ21haWwuY29tIl19LCJzaWduX2luX3Byb3ZpZGVyIjoicGFzc3dvcmQifX0.kArurtJNXDBOOW7-7lxxjt9XCXPsJ8mhuzfCq0Vf2zJSU5JfYlVDubf9fZKwBHdsBa5dNpSvqDPqUXbwFztAqP6ikoHJlvK4g4IpAHEw93N-V9CnSPgHS-YQiLgK5MK_gnoHFI2L0hCPAUP1rHxr2mbCZQs8zr9sl6KxkS7xaIkZjHSO8seDMdVDaP22OYEmLIMjVqbytyf7fW6jtB80bsFnGu358LgppRa5VBlH8v14kPswAY6G1RAQDgjEfQhmCTMvNNUJ_gwbtINNPakTEHQJsa8l3QUZ10T82phyXBS_VlJ7m0PyViTR2dbABAOhNI4yEF-ZaE38tw2AWTiioA",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/api/v1/brands/B7VYuXfWgPSmcwuxJjyx",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"brands",
+						"B7VYuXfWgPSmcwuxJjyx"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update a Brand",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6Ijg1NzA4MWNhOWNiYjM3YzIzNDk4ZGQzOTQzYmYzNzFhMDU4ODNkMjgiLCJ0eXAiOiJKV1QifQ.eyJyb2xlIjoiYWRtaW4iLCJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vcHJvamVjdC0tLWZhc2hpb24taXRlbS1hcGkiLCJhdWQiOiJwcm9qZWN0LS0tZmFzaGlvbi1pdGVtLWFwaSIsImF1dGhfdGltZSI6MTc0NTE2NjMxOCwidXNlcl9pZCI6IjF5enpwZ1Z0MXlTUkNUVDBsYXFUOXFZS0I2cDEiLCJzdWIiOiIxeXp6cGdWdDF5U1JDVFQwbGFxVDlxWUtCNnAxIiwiaWF0IjoxNzQ1MTY2MzE4LCJleHAiOjE3NDUxNjk5MTgsImVtYWlsIjoicmFqdmVlcmNhQGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwiZmlyZWJhc2UiOnsiaWRlbnRpdGllcyI6eyJlbWFpbCI6WyJyYWp2ZWVyY2FAZ21haWwuY29tIl19LCJzaWduX2luX3Byb3ZpZGVyIjoicGFzc3dvcmQifX0.wLGCZ53qTNCPOLDsokZBiSZGr9v4eLVwtYI6M7d32EtEediB-6IyTBuml9TvfN95iXC6oUWPmm_-GY3u7iyFwSFWza8qn67It-Qxa_a3JINSFt5IoR79tDFxJ38dwHvpnXrDzyfon1yxhk34EUo_zuvMyO2rvA3ZVQJQdyybF2XhYPNgQXPrgiYYQyDIo-COdaWsoCZR-LC0MW2d9z84GCsSjQeg4tQpDPcM3hFpHCzfD473pwYn0H0cjLR8oLl6s0hkWVvsW67d6KFpyv3UC5SNn13L9ChEm0XfkYDVLydkJ3bXshRCSEMajI83AXigl5e30T5bufJBorBXpW4q_g",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Adidas\",\r\n  \"country\": \"Germany\",\r\n  \"establishedYear\": \"1949\",\r\n  \"description\": \"Internationally recognized sports brand\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v1/brands/2MOMK2OOkT8SsuUigD9l",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"brands",
+						"2MOMK2OOkT8SsuUigD9l"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete a Brand",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6Ijg1NzA4MWNhOWNiYjM3YzIzNDk4ZGQzOTQzYmYzNzFhMDU4ODNkMjgiLCJ0eXAiOiJKV1QifQ.eyJyb2xlIjoiYWRtaW4iLCJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vcHJvamVjdC0tLWZhc2hpb24taXRlbS1hcGkiLCJhdWQiOiJwcm9qZWN0LS0tZmFzaGlvbi1pdGVtLWFwaSIsImF1dGhfdGltZSI6MTc0NTE2NjMxOCwidXNlcl9pZCI6IjF5enpwZ1Z0MXlTUkNUVDBsYXFUOXFZS0I2cDEiLCJzdWIiOiIxeXp6cGdWdDF5U1JDVFQwbGFxVDlxWUtCNnAxIiwiaWF0IjoxNzQ1MTY2MzE4LCJleHAiOjE3NDUxNjk5MTgsImVtYWlsIjoicmFqdmVlcmNhQGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwiZmlyZWJhc2UiOnsiaWRlbnRpdGllcyI6eyJlbWFpbCI6WyJyYWp2ZWVyY2FAZ21haWwuY29tIl19LCJzaWduX2luX3Byb3ZpZGVyIjoicGFzc3dvcmQifX0.wLGCZ53qTNCPOLDsokZBiSZGr9v4eLVwtYI6M7d32EtEediB-6IyTBuml9TvfN95iXC6oUWPmm_-GY3u7iyFwSFWza8qn67It-Qxa_a3JINSFt5IoR79tDFxJ38dwHvpnXrDzyfon1yxhk34EUo_zuvMyO2rvA3ZVQJQdyybF2XhYPNgQXPrgiYYQyDIo-COdaWsoCZR-LC0MW2d9z84GCsSjQeg4tQpDPcM3hFpHCzfD473pwYn0H0cjLR8oLl6s0hkWVvsW67d6KFpyv3UC5SNn13L9ChEm0XfkYDVLydkJ3bXshRCSEMajI83AXigl5e30T5bufJBorBXpW4q_g",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/api/v1/brands/2MOMK2OOkT8SsuUigD9l",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"brands",
+						"2MOMK2OOkT8SsuUigD9l"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
