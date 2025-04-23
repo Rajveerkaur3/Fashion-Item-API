@@ -1,0 +1,1323 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Fashion Item API Documentation",
+    "version": "1.0.0",
+    "description": "API to manage fashion items, discounts, brands, and videos in the store"
+  },
+  "tags": [
+    {
+      "name": "Fashion Items",
+      "description": "Operations with fashion items"
+    },
+    {
+      "name": "Discounts",
+      "description": "Discount management"
+    },
+    {
+      "name": "Brands",
+      "description": "Brand operations"
+    },
+    {
+      "name": "Videos",
+      "description": "Video upload and management"
+    }
+  ],
+  "paths": {
+    "/api/v1/fashion-items": {
+      "post": {
+        "tags": [
+          "Fashion Items"
+        ],
+        "summary": "Create a new fashion item",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FashionItem",
+                "type": "object",
+                "required": [
+                  "item_name",
+                  "brand",
+                  "category",
+                  "size",
+                  "price",
+                  "color"
+                ],
+                "properties": {
+                  "item_name": {
+                    "type": "string",
+                    "example": "Floral Dress"
+                  },
+                  "brand": {
+                    "type": "string",
+                    "example": "Zara"
+                  },
+                  "category": {
+                    "type": "string",
+                    "example": "Dress"
+                  },
+                  "size": {
+                    "type": "string",
+                    "example": "M"
+                  },
+                  "price": {
+                    "type": "string",
+                    "example": "49.99"
+                  },
+                  "color": {
+                    "type": "string",
+                    "example": "Pink"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Fashion item created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FashionItem"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "createFashionItem"
+      },
+      "get": {
+        "tags": [
+          "Fashion Items"
+        ],
+        "summary": "Retrieve all fashion items",
+        "responses": {
+          "200": {
+            "description": "List of all fashion items",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "properties": {
+                    "fashion_items": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/FashionItem"
+                      }
+                    }
+                  },
+                  "items": {
+                    "$ref": "#/components/schemas/FashionItem"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "getAllFashionItems"
+      }
+    },
+    "/api/v1/discounts": {
+      "post": {
+        "tags": [
+          "Discounts"
+        ],
+        "summary": "Create a new discount",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Discount",
+                "type": "object",
+                "required": [
+                  "percentage",
+                  "description",
+                  "startDate",
+                  "endDate"
+                ],
+                "properties": {
+                  "percentage": {
+                    "type": "string",
+                    "example": "20%"
+                  },
+                  "description": {
+                    "type": "string",
+                    "example": "Winter Sale"
+                  },
+                  "startDate": {
+                    "type": "string",
+                    "example": "2025-12-01"
+                  },
+                  "endDate": {
+                    "type": "string",
+                    "example": "2025-12-31"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Discount created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Discount"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "createDiscount"
+      },
+      "get": {
+        "tags": [
+          "Discounts"
+        ],
+        "summary": "Retrieve all discounts",
+        "responses": {
+          "200": {
+            "description": "List of all discounts",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "properties": {
+                    "discounts": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Discount"
+                      }
+                    }
+                  },
+                  "items": {
+                    "$ref": "#/components/schemas/Discount"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "getAllDiscounts"
+      }
+    },
+    "/api/v1/brands": {
+      "post": {
+        "tags": [
+          "Brands"
+        ],
+        "summary": "Create a new brand",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Brand",
+                "type": "object",
+                "required": [
+                  "name",
+                  "country",
+                  "establishedYear",
+                  "description"
+                ],
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "example": "Nike"
+                  },
+                  "country": {
+                    "type": "string",
+                    "example": "USA"
+                  },
+                  "establishedYear": {
+                    "type": "string",
+                    "example": "1964"
+                  },
+                  "description": {
+                    "type": "string",
+                    "example": "Global sportswear and accessories brand"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Brand created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Brand"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "createBrand"
+      },
+      "get": {
+        "tags": [
+          "Brands"
+        ],
+        "summary": "Retrieve all brands",
+        "responses": {
+          "200": {
+            "description": "List of all brands",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "properties": {
+                    "brands": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Brand"
+                      }
+                    }
+                  },
+                  "items": {
+                    "$ref": "#/components/schemas/Brand"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "getAllBrands"
+      }
+    },
+    "/api/v1/videos/upload": {
+      "post": {
+        "tags": [
+          "Videos"
+        ],
+        "summary": "Upload a video",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/UploadVideo",
+                "type": "object",
+                "required": [
+                  "username",
+                  "itemId",
+                  "uploadDate",
+                  "file"
+                ],
+                "properties": {
+                  "username": {
+                    "type": "string",
+                    "example": "john_doe"
+                  },
+                  "itemId": {
+                    "type": "string",
+                    "example": "123"
+                  },
+                  "uploadDate": {
+                    "type": "string",
+                    "format": "date",
+                    "example": "2023-01-01"
+                  },
+                  "feedback": {
+                    "type": "string",
+                    "example": "This video shows how the item performs in real life."
+                  },
+                  "file": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Video uploaded successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Video uploaded successfully 😊🔥"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Video uploaded successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Video uploaded successfully"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "username": {
+                          "type": "string"
+                        },
+                        "itemId": {
+                          "type": "string"
+                        },
+                        "feedback": {
+                          "type": "string"
+                        },
+                        "fileName": {
+                          "type": "string"
+                        },
+                        "filePath": {
+                          "type": "string"
+                        },
+                        "size": {
+                          "type": "number",
+                          "example": 5242880
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Invalid video file"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "File too large"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        },
+        "operationId": "uploadVideo"
+      }
+    },
+    "/api/v1/videos/{id}": {
+      "delete": {
+        "tags": [
+          "Videos"
+        ],
+        "summary": "Delete a video by ID",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "video-123456789"
+            },
+            "description": "The ID of the video to delete"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Video deleted successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Video deleted successfully"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Video not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Video not found"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "deleteVideo"
+      }
+    },
+    "/api/v1/brands/{id}": {
+      "get": {
+        "summary": "Get a brand by ID",
+        "operationId": "getBrandById",
+        "tags": [
+          "Brands"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "ID of the brand",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Brand details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Brand"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Update a brand",
+        "operationId": "updateBrand",
+        "tags": [
+          "Brands"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "ID of the brand to update",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "example": "Adidas"
+                  },
+                  "country": {
+                    "type": "string",
+                    "example": "Germany"
+                  },
+                  "establishedYear": {
+                    "type": "string",
+                    "example": "1949"
+                  },
+                  "description": {
+                    "type": "string",
+                    "example": "Internationally recognized sports brand"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Brand updated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Brand"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete a brand by ID",
+        "operationId": "deleteBrand",
+        "tags": [
+          "Brands"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "ID of the brand to delete",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Brand deleted successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Brand deleted successfully."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/discounts/{id}": {
+      "get": {
+        "summary": "Get a discount by ID",
+        "operationId": "getDiscountById",
+        "tags": [
+          "Discounts"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "ID of the discount",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Discount details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Discount"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Update a discount",
+        "operationId": "updateDiscount",
+        "tags": [
+          "Discounts"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "ID of the discount to update",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "percentage": {
+                    "type": "string",
+                    "example": "25%"
+                  },
+                  "description": {
+                    "type": "string",
+                    "example": "Spring Sale"
+                  },
+                  "startDate": {
+                    "type": "string",
+                    "example": "2026-03-01"
+                  },
+                  "endDate": {
+                    "type": "string",
+                    "example": "2026-03-31"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Discount updated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Discount"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete a discount by ID",
+        "operationId": "deleteDiscount",
+        "tags": [
+          "Discounts"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "ID of the discount to delete",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Discount deleted successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Discount deleted successfully."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/fashion-items/{id}": {
+      "get": {
+        "summary": "Get a fashion item by ID",
+        "operationId": "getFashionItemById",
+        "tags": [
+          "Fashion Items"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "ID of the fashion item",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Fashion item details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FashionItem"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Update a fashion item",
+        "operationId": "updateFashionItem",
+        "tags": [
+          "Fashion Items"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "ID of the fashion item to update",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "item_name": {
+                    "type": "string",
+                    "example": "Floral Dress"
+                  },
+                  "brand": {
+                    "type": "string",
+                    "example": "Zara"
+                  },
+                  "category": {
+                    "type": "string",
+                    "example": "Dress"
+                  },
+                  "size": {
+                    "type": "string",
+                    "example": "L"
+                  },
+                  "price": {
+                    "type": "string",
+                    "example": "59.99"
+                  },
+                  "color": {
+                    "type": "string",
+                    "example": "Pink"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Fashion item updated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FashionItem"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete a fashion item by ID",
+        "operationId": "deleteFashionItem",
+        "tags": [
+          "Fashion Items"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "ID of the fashion item to delete",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Fashion item deleted successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Fashion item deleted successfully."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/reviews": {
+      "post": {
+        "summary": "Create a new user review",
+        "operationId": "createUserReview",
+        "tags": [
+          "UserReviews"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "fashionItemId",
+                  "userName",
+                  "comment",
+                  "rating"
+                ],
+                "properties": {
+                  "fashionItemId": {
+                    "type": "string",
+                    "example": "item123"
+                  },
+                  "userName": {
+                    "type": "string",
+                    "example": "JohnDoe"
+                  },
+                  "comment": {
+                    "type": "string",
+                    "example": "Amazing quality and fit!"
+                  },
+                  "rating": {
+                    "type": "string",
+                    "example": "5"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Review created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserReview"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "Get all user reviews",
+        "operationId": "getAllUserReviews",
+        "tags": [
+          "UserReviews"
+        ],
+        "responses": {
+          "200": {
+            "description": "List of user reviews",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/UserReview"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/reviews/{id}": {
+      "get": {
+        "summary": "Get a review by ID",
+        "operationId": "getUserReviewById",
+        "tags": [
+          "UserReviews"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Review details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserReview"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Update a user review",
+        "operationId": "updateUserReview",
+        "tags": [
+          "UserReviews"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "comment": {
+                    "type": "string",
+                    "example": "Updated comment text."
+                  },
+                  "rating": {
+                    "type": "string",
+                    "example": "4"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Review updated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserReview"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete a user review",
+        "operationId": "deleteUserReview",
+        "tags": [
+          "UserReviews"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Review deleted successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Review deleted successfully."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/videos/filter/item/{itemId}": {
+      "get": {
+        "summary": "Get videos by Item ID",
+        "operationId": "getVideosByItemId",
+        "tags": [
+          "Videos"
+        ],
+        "parameters": [
+          {
+            "name": "itemId",
+            "in": "path",
+            "required": true,
+            "description": "The item ID to filter videos by",
+            "schema": {
+              "type": "string",
+              "example": "123"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of videos filtered by item ID"
+          },
+          "404": {
+            "description": "No videos found for the provided item ID"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "FashionItem": {
+        "type": "object",
+        "properties": {
+          "item_name": {
+            "type": "string",
+            "example": "Floral Dress",
+            "description": "The name of the fashion item"
+          },
+          "brand": {
+            "type": "string",
+            "example": "Zara",
+            "description": "The brand of the item"
+          },
+          "category": {
+            "type": "string",
+            "example": "Dress",
+            "description": "The category the item belongs to (e.g., tops, bottoms)"
+          },
+          "size": {
+            "type": "string",
+            "example": "M",
+            "description": "The size of the item (e.g., S, M, L)"
+          },
+          "price": {
+            "type": "string",
+            "example": "49.99",
+            "description": "The price of the item"
+          },
+          "color": {
+            "type": "string",
+            "example": "Pink",
+            "description": "The color of the item"
+          },
+          "id": {
+            "type": "string",
+            "description": "The unique identifier for a fashion item"
+          }
+        },
+        "required": [
+          "item_name",
+          "brand",
+          "category",
+          "size",
+          "price",
+          "color"
+        ]
+      },
+      "Discount": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "1",
+            "description": "The unique identifier for the discount"
+          },
+          "percentage": {
+            "type": "string",
+            "example": "20%",
+            "description": "The discount percentage (e.g., \"20%\")"
+          },
+          "description": {
+            "type": "string",
+            "example": "Winter Sale",
+            "description": "A brief description of the discount (e.g., \"Winter Sale\")"
+          },
+          "startDate": {
+            "type": "string",
+            "example": "2025-12-01",
+            "format": "date-time",
+            "description": "The start date of the discount"
+          },
+          "endDate": {
+            "type": "string",
+            "example": "2025-12-31",
+            "format": "date-time",
+            "description": "The end date of the discount"
+          }
+        },
+        "required": [
+          "percentage",
+          "description",
+          "startDate",
+          "endDate"
+        ]
+      },
+      "Brand": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "1",
+            "description": "The unique identifier for the brand"
+          },
+          "name": {
+            "type": "string",
+            "example": "Zara",
+            "description": "The name of the brand"
+          },
+          "country": {
+            "type": "string",
+            "example": "Spain",
+            "description": "The country of origin of the brand"
+          },
+          "establishedYear": {
+            "type": "string",
+            "example": "1975",
+            "description": "The year the brand was established"
+          },
+          "description": {
+            "type": "string",
+            "example": "A global fashion retailer",
+            "description": "A brief description of the brand"
+          }
+        },
+        "required": [
+          "name",
+          "country",
+          "establishedYear",
+          "description"
+        ]
+      },
+      "UploadVideo": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string",
+            "example": "john_doe"
+          },
+          "itemId": {
+            "type": "string",
+            "example": "123"
+          },
+          "uploadDate": {
+            "type": "string",
+            "example": "2025-04-10"
+          },
+          "feedback": {
+            "type": "string",
+            "example": "Great material and color! 😊🔥"
+          },
+          "file": {
+            "type": "string",
+            "format": "binary",
+            "description": "Video file to be uploaded"
+          }
+        },
+        "required": [
+          "username",
+          "itemId",
+          "uploadDate",
+          "file",
+          "feedback"
+        ]
+      },
+      "UserReview": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "1",
+            "description": "The unique identifier for the user review"
+          },
+          "username": {
+            "type": "string",
+            "example": "john_doe"
+          },
+          "itemId": {
+            "type": "string",
+            "example": "12345"
+          },
+          "rating": {
+            "type": "string",
+            "example": 4,
+            "description": "The rating given by the user, represented as a string (e.g., \"5\")"
+          },
+          "comment": {
+            "type": "string",
+            "example": "Loved the fabric and fit!",
+            "description": "The review comment provided by the user"
+          },
+          "createdAt": {
+            "type": "string",
+            "example": "2025-04-10T12:00:00Z",
+            "format": "date-time",
+            "description": "The date and time when the review was created"
+          },
+          "fashionItemId": {
+            "type": "string",
+            "description": "The ID of the fashion item being reviewed"
+          },
+          "userName": {
+            "type": "string",
+            "description": "The name of the user who left the review"
+          }
+        },
+        "required": [
+          "username",
+          "itemId",
+          "rating",
+          "comment"
+        ]
+      },
+      "VideoUpload": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string",
+            "description": "The username of the person uploading the video"
+          },
+          "itemId": {
+            "type": "string",
+            "description": "The ID of the item associated with the video"
+          },
+          "uploadDate": {
+            "type": "string",
+            "format": "date-time",
+            "description": "The date and time when the video was uploaded"
+          },
+          "file": {
+            "type": "string",
+            "format": "binary",
+            "description": "The uploaded video file"
+          },
+          "feedback": {
+            "type": "string",
+            "description": "Optional feedback about the video upload"
+          }
+        }
+      }
+    }
+  }
+}
