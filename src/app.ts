@@ -1,8 +1,14 @@
-import express from "express";
+import dotenv from "dotenv";
+import helmet from "helmet";
+import cors from "cors";
 import morgan from "morgan";
+import express from "express";
 import multer from 'multer';
 import path from "path";
 const upload = multer({ dest: 'uploads/' });
+
+// load the enviroment variables BEFORE your internal imports
+dotenv.config();
 
 // Import fashion item routes
 import fashionItemRoutes from './api/v1/routes/FashionItemRoutes'; 
@@ -20,6 +26,21 @@ import errorHandler from "./api/v1/middleware/errorHandler";
 
 const app = express();
 
+// helmet
+app.use(helmet());
+
+// cors
+app.use(cors());
+
+// For more specific CORS configuration:
+
+app.use(cors({
+  origin: ['https://yourappdomain.com', 'https://admin.yourappdomain.com'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
+
+
 // Use Morgan for HTTP request logging
 app.use(morgan("combined"));
 
@@ -30,6 +51,13 @@ app.use("/uploads", express.static(path.join(__dirname, "../uploads")));
 
 // Setup Swagger for API documentation
 setupSwagger(app);
+
+// initialize morgan
+app.use(morgan("combined"));
+
+// ability to work with json request via body
+app.use(express.json());
+app.use(errorHandler)
 
 // Root route
 app.get("/", (req, res) => {
